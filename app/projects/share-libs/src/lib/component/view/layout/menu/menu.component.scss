@@ -1,0 +1,12 @@
+@import "../../../../style/theme.scss";
+
+.menu {
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  top: 70px;
+  left: 0;
+  padding-top: 20px;
+  z-index: 98;
+  background-color: $gainsboro;
+}

@@ -1,0 +1,13 @@
+$glitzy-gold: #d6a02b;
+$banana-mania: #f5e1ac;
+$alabaster: #edeae0;
+$dark-cerulean: #164576;
+$indigo-dye: #2b4360;
+$squid-ink: #283849;
+$dim-gray: #736f78;
+$dark-gray: #b2afb5;
+$gainsboro: #dcdbdd;
+
+@mixin font-color {
+  color: $alabaster;
+}

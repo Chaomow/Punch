@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './view/login/login.component';
 
 /**
  * @class AppModule
  */
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [AppComponent, LoginComponent],
+  imports: [NoopAnimationsModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })

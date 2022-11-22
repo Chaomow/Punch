@@ -1,0 +1,80 @@
+{
+  "root": true,
+  "ignorePatterns": ["./**/*"],
+  "plugins": ["jsdoc"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:jsdoc/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "lib",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "lib",
+            "style": "kebab-case"
+          }
+        ],
+        "dot-notation": "warn",
+        "jsdoc/check-param-names": 2,
+        "jsdoc/check-syntax": 1,
+        "jsdoc/check-tag-names": 0,
+        "jsdoc/check-types": 1,
+        "jsdoc/require-description": [
+          "error",
+          {
+            "descriptionStyle": "any",
+            "checkConstructors": false,
+            "contexts": [
+              "ClassDeclaration",
+              "ArrowFunctionExpression",
+              "FunctionDeclaration",
+              "FunctionExpression"
+            ]
+          }
+        ],
+        "jsdoc/require-jsdoc": [
+          "error",
+          {
+            "require": {
+              "ClassDeclaration": true,
+              "ArrowFunctionExpression": true,
+              "ClassExpression": true,
+              "FunctionDeclaration": true,
+              "FunctionExpression": true,
+              "MethodDefinition": true
+            }
+          }
+        ],
+        "jsdoc/require-param": 2,
+        "jsdoc/require-param-description": 2,
+        "jsdoc/require-param-name": 2,
+        "jsdoc/require-returns": 2,
+        "jsdoc/require-returns-check": 2,
+        "jsdoc/require-returns-description": 2,
+        "jsdoc/valid-types": 1,
+        "no-console": [
+          "warn",
+          {
+            "allow": ["warn", "error"]
+          }
+        ],
+        "semi": ["error", "always"]
+      }
+    }
+  ]
+}

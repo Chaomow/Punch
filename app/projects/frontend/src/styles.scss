@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+@import "../../share-libs/src/lib/style/theme.scss";
+
+@mixin pm-0 {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  @include pm-0;
+}
+
+.main .main-content {
+  min-height: calc(100vh - 165px);
+  margin: 0;
+}
+
+.p-slidemenu {
+  background: none !important;
+  border: none !important;
+  height: 100%;
+  .p-menuitem-link:focus {
+    box-shadow: inset 0 0 0 0.15rem $dark-gray !important;
+  }
+}
