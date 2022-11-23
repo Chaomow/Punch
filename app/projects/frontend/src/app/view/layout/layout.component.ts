@@ -20,7 +20,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
     this.menuItems = [
       {
-        label: '員工清單',
+        label: '員工管理',
         icon: 'pi pi-users',
       },
       {

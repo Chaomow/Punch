@@ -1,3 +1,115 @@
-<div class="main-content"></div>
-
-<input type="text" pInputText />
+<div class="main-content">
+  <p-toolbar styleClass="mb-4 gap-2">
+    <ng-template pTemplate="left"></ng-template>
+    <ng-template pTemplate="right">
+      <button
+        pButton
+        pRipple
+        label="新增"
+        icon="pi pi-user-plus"
+        class="p-button-success mr-2"
+        (click)="openNew()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        label="刪除"
+        icon="pi pi-user-minus"
+        class="p-button-danger"
+        (click)="deleteSelectedEmployee()"
+        [disabled]="!selectedEmployees || !selectedEmployees.length"
+      ></button>
+    </ng-template>
+  </p-toolbar>
+  <p-table
+    #dt
+    [value]="employees"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="[
+      'name',
+      'country.name',
+      'representative.name',
+      'status'
+    ]"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedEmployees"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h5 class="m-0">員工管理</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (value)="(searchValue)"
+            (input)="dt.filterGlobal(searchValue, 'contains')"
+            placeholder="Search..."
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th pSortableColumn="dept" style="min-width: 5rem">
+          部門 <p-sortIcon field="dept"></p-sortIcon>
+        </th>
+        <th pSortableColumn="id" style="min-width: 5rem">
+          員編 <p-sortIcon field="id"></p-sortIcon>
+        </th>
+        <th pSortableColumn="name" style="min-width: 5rem">
+          姓名 <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="engName" style="min-width: 5rem">
+          英文姓名 <p-sortIcon field="engName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="level" style="min-width: 5rem">
+          職稱 <p-sortIcon field="level"></p-sortIcon>
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-employee>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="employee"></p-tableCheckbox>
+        </td>
+        <td>{{ employee.dept }}</td>
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.negName }}</td>
+        <td>{{ employee.level }}</td>
+        <td></td>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-user-edit"
+            class="p-button-rounded p-button-success mr-2"
+            (click)="editEmployee(employee)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-user-minus"
+            class="p-button-rounded p-button-warning"
+            (click)="deleteEmployee(employee)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        共 {{ employees ? employees.length : 0 }} 名員工.
+      </div>
+    </ng-template>
+  </p-table>
+</div>

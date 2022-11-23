@@ -9,6 +9,8 @@ import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TableModule } from 'primeng/table';
 
 /**
  * PublicModule
@@ -26,6 +28,8 @@ import { MessageModule } from 'primeng/message';
     ToastModule,
     MessagesModule,
     MessageModule,
+    ToolbarModule,
+    TableModule,
   ],
   exports: [
     InputTextModule,
@@ -37,6 +41,8 @@ import { MessageModule } from 'primeng/message';
     ToastModule,
     MessagesModule,
     MessageModule,
+    ToolbarModule,
+    TableModule,
   ],
 })
 export class PublicModule {}
