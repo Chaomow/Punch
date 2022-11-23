@@ -60,11 +60,11 @@
           <th style="width: 4rem">
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
-          <th pSortableColumn="dept" style="min-width: 5rem">
-            部門 <p-sortIcon field="dept"></p-sortIcon>
-          </th>
           <th pSortableColumn="id" style="min-width: 5rem">
             員編 <p-sortIcon field="id"></p-sortIcon>
+          </th>
+          <th pSortableColumn="dept" style="min-width: 5rem">
+            部門 <p-sortIcon field="dept"></p-sortIcon>
           </th>
           <th pSortableColumn="name" style="min-width: 5rem">
             姓名 <p-sortIcon field="name"></p-sortIcon>
@@ -83,8 +83,8 @@
           <td>
             <p-tableCheckbox [value]="employee"></p-tableCheckbox>
           </td>
-          <td>{{ employee.dept }}</td>
           <td>{{ employee.id }}</td>
+          <td>{{ employee.dept }}</td>
           <td>{{ employee.name }}</td>
           <td>{{ employee.negName }}</td>
           <td>{{ employee.level }}</td>
