@@ -1,15 +1,13 @@
-@import "../../../../style/theme.scss";
-
 .footer {
   height: 95px;
-  background-color: $dim-gray;
+  background-color: var(--dim-gray);
   bottom: 0;
   padding: 2rem 3rem;
   .footer-left {
-    @include font-color;
+    color: var(--alabaster);
   }
   .footer-right {
-    @include font-color;
+    color: var(--alabaster);
     float: right;
   }
 }
