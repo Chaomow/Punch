@@ -5,7 +5,7 @@ import { MenuItem } from 'primeng/api';
  * MenuComponent
  */
 @Component({
-  selector: 'lib-menu',
+  selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
