@@ -1,13 +1,15 @@
 .footer {
   height: 95px;
   background-color: var(--dim-gray);
-  bottom: 0;
   padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
   .footer-left {
     color: var(--alabaster);
   }
   .footer-right {
     color: var(--alabaster);
-    float: right;
   }
 }

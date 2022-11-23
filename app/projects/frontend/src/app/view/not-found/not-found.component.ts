@@ -5,7 +5,7 @@ import { AnimationOptions } from 'ngx-lottie';
  * NotFoundComponent
  */
 @Component({
-  selector: 'lib-not-found',
+  selector: 'app-not-found',
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.scss'],
 })

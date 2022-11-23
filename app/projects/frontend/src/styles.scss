@@ -1,17 +1,25 @@
 @import "../../share-libs/src/lib/style/theme.scss";
 
 @mixin pm-0 {
-  padding: 0;
-  margin: 0;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 body {
   @include pm-0;
 }
 
+.pm-0 {
+  @include pm-0;
+}
+
 .main .main-content {
   min-height: calc(100vh - 165px);
   margin: 0;
+}
+
+.df-bg-color {
+  background-color: var(--alabaster);
 }
 
 .p-slidemenu {
