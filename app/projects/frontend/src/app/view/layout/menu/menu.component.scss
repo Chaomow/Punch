@@ -8,3 +8,42 @@
   z-index: 98;
   background-color: var(--gainsboro);
 }
+.mask,
+.menu-icon {
+  display: none;
+}
+
+@media screen and (max-width: 960px) {
+  .menu-icon {
+    position: fixed;
+    display: block;
+    top: 15px;
+    left: 15px;
+    z-index: 1101;
+    i {
+      font-size: 2rem;
+      color: var(--gainsboro);
+      cursor: pointer;
+    }
+    i:hover {
+      filter: brightness(1.5);
+    }
+  }
+  .menu {
+    top: 0;
+    z-index: 1102;
+    height: 100%;
+    transform: translate(-100%);
+    &.active {
+      transform: translate(0);
+    }
+  }
+  .mask.active {
+    display: block;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1101;
+    background-color: #0006;
+  }
+}

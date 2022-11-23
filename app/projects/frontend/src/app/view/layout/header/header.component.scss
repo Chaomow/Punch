@@ -26,3 +26,17 @@
   font-size: xx-large;
   font-weight: 500;
 }
+
+@media screen and (max-width: 960px) {
+  .header {
+    display: flex;
+    justify-content: end;
+    padding-right: 8px;
+  }
+  .title {
+    font-size: x-large;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
