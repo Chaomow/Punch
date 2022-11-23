@@ -17,6 +17,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "paths": {
+      "@environment": ["projects/frontend/src/environments/environment"],
       "@frontend/*": ["projects/frontend/src/app/*"],
       "@libs/*": ["projects/share-libs/src/lib/*"]
     },

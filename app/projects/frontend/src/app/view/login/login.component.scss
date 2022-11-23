@@ -1,0 +1,24 @@
+@mixin logo-title {
+  vertical-align: middle;
+  display: inline-block;
+}
+.login-block {
+  padding-top: 70px;
+  background-color: var(--alabaster);
+}
+.header {
+  padding: 15px 35px 0px 35px;
+  background-color: var(--dark-cerulean);
+  border-bottom: 0.4rem var(--glitzy-gold) solid;
+}
+.logo {
+  @include logo-title;
+  width: 40px;
+  margin-right: 10px;
+}
+.title {
+  @include logo-title;
+  color: var(--alabaster);
+  font-size: xx-large;
+  font-weight: 500;
+}

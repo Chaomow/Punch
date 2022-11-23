@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { environment } from '@environment';
+import { PrimeNGConfig } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 /**
  * AppComponent
@@ -7,7 +10,22 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  providers: [MessageService],
 })
-export class AppComponent {
-  title = '打卡系統';
+export class AppComponent implements OnInit {
+  title = environment.title;
+
+  /**
+   * constructor
+   *
+   * @param {PrimeNGConfig} primengConfig PrimeNGConfig
+   */
+  constructor(private primengConfig: PrimeNGConfig) {}
+
+  /**
+   * ngOnInit
+   */
+  ngOnInit() {
+    this.primengConfig.ripple = true;
+  }
 }

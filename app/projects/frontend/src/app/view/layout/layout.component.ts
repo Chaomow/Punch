@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '@environment';
 import { MenuItem } from 'primeng/api';
 
 /**
@@ -10,7 +11,7 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
-  title = '員工打卡系統';
+  title = environment.title;
   menuItems: MenuItem[] = [];
 
   /**

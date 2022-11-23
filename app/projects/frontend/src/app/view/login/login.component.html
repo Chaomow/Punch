@@ -1,1 +1,75 @@
-<p>login works!</p>
+<div class="login-block grid xl:h-screen m-0">
+  <p-card class="col-offset-1 col-10 xl:col-offset-4 xl:col-4">
+    <ng-template pTemplate="header">
+      <div class="header">
+        <img class="logo" src="assets/img/logo.svg" />
+        <div class="title">{{ title }}</div>
+      </div>
+    </ng-template>
+    <form [formGroup]="loginForm" (ngSubmit)="submit(loginForm.value)">
+      <div calss="mt-6">
+        <label for="username">登入帳號</label>
+        <input
+          pInputText
+          id="username"
+          type="text"
+          class="w-full"
+          [ngClass]="
+            loginForm.controls['username'].errors ? 'ng-invalid ng-dirty' : ''
+          "
+          formControlName="username"
+        />
+        <small
+          *ngIf="
+            loginForm.controls['username'].touched &&
+            loginForm.controls['username'].errors
+          "
+          class="p-error block"
+        >
+          請輸入帳號
+        </small>
+      </div>
+      <div calss="mt-5">
+        <label for="password">登入密碼</label>
+        <input
+          pInputText
+          id="password"
+          type="password"
+          class="w-full"
+          [ngClass]="
+            loginForm.controls['password'].errors ? 'ng-invalid ng-dirty' : ''
+          "
+          formControlName="password"
+        />
+        <small
+          *ngIf="
+            loginForm.controls['password'].touched &&
+            loginForm.controls['password'].errors
+          "
+          class="p-error block"
+        >
+          請輸入密碼
+        </small>
+      </div>
+      <div class="mt-5 flex justify-content-end">
+        <button
+          pButton
+          pRipple
+          type="submit"
+          label="登入"
+          icon="pi pi-sign-in"
+          class="p-button-raised mr-3"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="忘記密碼"
+          icon="pi pi-question-circle"
+          class="p-button-raised p-button-warning p-button-text"
+          (click)="forget()"
+        ></button>
+      </div>
+    </form>
+  </p-card>
+</div>
