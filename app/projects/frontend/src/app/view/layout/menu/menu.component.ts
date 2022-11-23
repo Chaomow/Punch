@@ -18,15 +18,15 @@ export class MenuComponent {
    * 點擊漢堡條
    */
   onIconClick() {
-    this.menu.nativeElement.classList.add('active');
     this.mask.nativeElement.classList.add('active');
+    this.menu.nativeElement.classList.add('active');
   }
 
   /**
    * 點擊遮罩
    */
   onMaskClick() {
-    this.menu.nativeElement.classList.remove('active');
     this.mask.nativeElement.classList.remove('active');
+    this.menu.nativeElement.classList.remove('active');
   }
 }
