@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  title: '員工打卡測試系統',
+  title: '出勤紀錄系統BETA',
 };

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  title: '員工打卡系統',
+  title: '出勤紀錄系統',
 };

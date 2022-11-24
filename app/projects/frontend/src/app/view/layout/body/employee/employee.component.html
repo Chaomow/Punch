@@ -1,5 +1,5 @@
 <div class="main-content">
-  <p-card>
+  <p-card styleClass="main-p-card">
     <p-toolbar styleClass="mb-4 gap-2">
       <ng-template pTemplate="left"></ng-template>
       <ng-template pTemplate="right">
@@ -11,15 +11,6 @@
           class="p-button-success mr-2"
           (click)="openNew()"
         ></button>
-        <button
-          pButton
-          pRipple
-          label="刪除"
-          icon="pi pi-user-minus"
-          class="p-button-danger"
-          (click)="deleteSelectedEmployee()"
-          [disabled]="!selectedEmployees || !selectedEmployees.length"
-        ></button>
       </ng-template>
     </p-toolbar>
     <p-table
@@ -27,18 +18,13 @@
       [value]="employees"
       [rows]="10"
       [paginator]="true"
-      [globalFilterFields]="[
-        'name',
-        'country.name',
-        'representative.name',
-        'status'
-      ]"
-      [tableStyle]="{ 'min-width': '75rem' }"
+      [globalFilterFields]="['id', 'dept', 'name', 'engName', 'level']"
       [(selection)]="selectedEmployees"
       [rowHover]="true"
-      dataKey="id"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      currentPageReportTemplate="顯示第 {first} 到 {last} 筆員工，共 {totalRecords} 筆"
       [showCurrentPageReport]="true"
+      responsiveLayout="stack"
+      dataKey="id"
     >
       <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
@@ -48,8 +34,7 @@
             <input
               pInputText
               type="text"
-              (value)="(searchValue)"
-              (input)="dt.filterGlobal(searchValue, 'contains')"
+              (input)="dt.filterGlobal($any($event.target).value, 'contains')"
               placeholder="搜尋..."
             />
           </span>
@@ -57,9 +42,6 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th style="width: 4rem">
-            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-          </th>
           <th pSortableColumn="id" style="min-width: 5rem">
             員編 <p-sortIcon field="id"></p-sortIcon>
           </th>
@@ -81,36 +63,42 @@
       <ng-template pTemplate="body" let-employee>
         <tr>
           <td>
-            <p-tableCheckbox [value]="employee"></p-tableCheckbox>
+            <span class="p-column-title font-bold">員編</span>
+            {{ employee.id }}
           </td>
-          <td>{{ employee.id }}</td>
-          <td>{{ employee.dept }}</td>
-          <td>{{ employee.name }}</td>
-          <td>{{ employee.negName }}</td>
-          <td>{{ employee.level }}</td>
-          <td></td>
+          <td>
+            <span class="p-column-title font-bold">部門</span>
+            {{ employee.dept | department }}
+          </td>
+          <td>
+            <span class="p-column-title font-bold">姓名</span>
+            {{ employee.name }}
+          </td>
+          <td>
+            <span class="p-column-title font-bold">英文姓名</span>
+            {{ employee.engName }}
+          </td>
+          <td>
+            <span class="p-column-title font-bold">職稱</span>
+            {{ employee.level | employeeLevel }}
+          </td>
           <td>
             <button
               pButton
               pRipple
               icon="pi pi-user-edit"
-              class="p-button-rounded p-button-success mr-2"
+              class="p-button-rounded p-button-info mr-2"
               (click)="editEmployee(employee)"
             ></button>
             <button
               pButton
               pRipple
               icon="pi pi-user-minus"
-              class="p-button-rounded p-button-warning"
+              class="p-button-rounded p-button-danger"
               (click)="deleteEmployee(employee)"
             ></button>
           </td>
         </tr>
-      </ng-template>
-      <ng-template pTemplate="summary">
-        <div class="flex align-items-center justify-content-between">
-          共 {{ employees ? employees.length : 0 }} 名員工.
-        </div>
       </ng-template>
     </p-table>
   </p-card>

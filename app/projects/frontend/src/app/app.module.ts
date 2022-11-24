@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PublicModule } from '@libs/module/public.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,8 +26,6 @@ export function playerFactory() {
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     PublicModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],

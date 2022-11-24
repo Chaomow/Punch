@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { environment } from '@environment';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { RouteService } from '@libs/service/route.service';
 import { MessageService } from 'primeng/api';
 
 /**
@@ -23,8 +24,12 @@ export class LoginComponent {
    * constructor
    *
    * @param {MessageService} messageService 訊息
+   * @param {RouteService} routeService 路由
    */
-  constructor(private messageService: MessageService) {}
+  constructor(
+    private messageService: MessageService,
+    private routeService: RouteService
+  ) {}
 
   /**
    * 登入
@@ -34,6 +39,7 @@ export class LoginComponent {
   submit(formValue: any): void {
     this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
+      this.routeService.go('index');
       this.messageService.add({
         severity: 'success',
         summary: '登入',

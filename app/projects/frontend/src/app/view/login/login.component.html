@@ -7,7 +7,7 @@
       </div>
     </ng-template>
     <form [formGroup]="loginForm" (ngSubmit)="submit(loginForm.value)">
-      <div calss="mt-6">
+      <div class="mb-4">
         <label for="username">登入帳號</label>
         <input
           pInputText
@@ -18,18 +18,19 @@
             loginForm.controls['username'].errors ? 'ng-invalid ng-dirty' : ''
           "
           formControlName="username"
+          placeholder="請輸入帳號"
         />
         <small
           *ngIf="
             loginForm.controls['username'].touched &&
             loginForm.controls['username'].errors
           "
-          class="p-error block"
+          class="p-error block absolute"
         >
           請輸入帳號
         </small>
       </div>
-      <div calss="mt-5">
+      <div class="mb-4">
         <label for="password">登入密碼</label>
         <input
           pInputText
@@ -40,13 +41,14 @@
             loginForm.controls['password'].errors ? 'ng-invalid ng-dirty' : ''
           "
           formControlName="password"
+          placeholder="請輸入密碼"
         />
         <small
           *ngIf="
             loginForm.controls['password'].touched &&
             loginForm.controls['password'].errors
           "
-          class="p-error block"
+          class="p-error block absolute"
         >
           請輸入密碼
         </small>
