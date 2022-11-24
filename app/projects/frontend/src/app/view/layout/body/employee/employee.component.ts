@@ -54,6 +54,13 @@ export class EmployeeComponent {
   }
 
   /**
+   * 每日上下班時間
+   *
+   * @param {any} employee employee
+   */
+  openPunch(employee: Employee) {}
+
+  /**
    * 編輯員工
    *
    * @param {any} employee employee

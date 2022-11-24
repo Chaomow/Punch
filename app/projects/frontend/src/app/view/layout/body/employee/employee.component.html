@@ -8,7 +8,7 @@
           pRipple
           label="新增"
           icon="pi pi-user-plus"
-          class="p-button-success mr-2"
+          class="p-button-text p-button-raised p-button-success mr-2"
           (click)="openNew()"
         ></button>
       </ng-template>
@@ -86,15 +86,23 @@
             <button
               pButton
               pRipple
+              icon="pi pi-clock"
+              class="p-button-rounded p-button-text p-button-raised p-button-help mr-2"
+              (click)="openPunch(employee)"
+              label="出勤紀錄"
+            ></button>
+            <button
+              pButton
+              pRipple
               icon="pi pi-user-edit"
-              class="p-button-rounded p-button-info mr-2"
+              class="p-button-rounded p-button-text p-button-raised p-button-info mr-2"
               (click)="editEmployee(employee)"
             ></button>
             <button
               pButton
               pRipple
               icon="pi pi-user-minus"
-              class="p-button-rounded p-button-danger"
+              class="p-button-rounded p-button-text p-button-raised p-button-danger"
               (click)="deleteEmployee(employee)"
             ></button>
           </td>
