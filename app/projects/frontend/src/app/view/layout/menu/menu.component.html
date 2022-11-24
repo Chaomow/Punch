@@ -1,5 +1,5 @@
 <div class="menu-icon">
-  <i class="pi pi-bars" (click)="onIconClick()"></i>
+  <i class="pi pi-bars" (click)="showMenu()"></i>
 </div>
 <div #menu class="menu">
   <p-slideMenu
@@ -8,4 +8,4 @@
     [viewportHeight]="400"
   ></p-slideMenu>
 </div>
-<div #mask class="mask" (click)="onMaskClick()"></div>
+<div #mask class="mask" (click)="hideMenu()"></div>
