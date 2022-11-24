@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { levelOptions, deptOptions } from '@libs/data/employee';
 import { DropdownOption } from '@libs/interface/dropdown-interface';
 import { Employee } from '@libs/interface/employee-interface';
-import { MessageService } from 'primeng/api';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 /**
@@ -15,7 +14,13 @@ import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
   styleUrls: ['./employee-dialog.component.scss'],
 })
 export class EmployeeDialogComponent implements OnInit {
-  employeeForm!: FormGroup;
+  employeeForm: FormGroup = new FormGroup({
+    id: new FormControl('', Validators.required),
+    dept: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
+    engName: new FormControl('', Validators.required),
+    level: new FormControl('', Validators.required),
+  });
   employee!: Employee;
   levelList!: DropdownOption[];
   deptList!: DropdownOption[];
@@ -25,12 +30,10 @@ export class EmployeeDialogComponent implements OnInit {
    *
    * @param {DynamicDialogRef} ref DynamicDialogRef
    * @param {DynamicDialogConfig} config DynamicDialogConfig
-   * @param {MessageService} messageService MessageService
    */
   constructor(
     public ref: DynamicDialogRef,
-    public config: DynamicDialogConfig,
-    private messageService: MessageService
+    public config: DynamicDialogConfig
   ) {}
 
   /**
@@ -39,28 +42,32 @@ export class EmployeeDialogComponent implements OnInit {
   ngOnInit(): void {
     this.deptList = deptOptions();
     this.levelList = levelOptions();
-    if (this.config) {
+    if (this.config && this.config.data) {
       this.employee = this.config.data as Employee;
-      this.employeeForm = new FormGroup({
-        id: new FormControl(
-          { value: this.employee.id, disabled: true },
-          Validators.required
-        ),
-        dept: new FormControl(this.employee.dept, Validators.required),
-        name: new FormControl(this.employee.name, Validators.required),
-        engName: new FormControl(this.employee.engName, Validators.required),
-        level: new FormControl(this.employee.level, Validators.required),
-      });
+      (this.employeeForm.get('id') as FormControl).setValue(this.employee.id);
+      (this.employeeForm.get('id') as FormControl).disable();
+      (this.employeeForm.get('dept') as FormControl).setValue(
+        this.employee.dept
+      );
+      (this.employeeForm.get('name') as FormControl).setValue(
+        this.employee.name
+      );
+      (this.employeeForm.get('engName') as FormControl).setValue(
+        this.employee.engName
+      );
+      (this.employeeForm.get('level') as FormControl).setValue(
+        this.employee.level
+      );
     }
   }
 
   /**
    * 儲存
-   *
-   * @param {any} formValue formValue
    */
-  submit(formValue: any): void {
+  submit(): void {
     this.employeeForm.markAllAsTouched();
-    this.ref.close(this.employeeForm.getRawValue());
+    if (this.employeeForm.valid) {
+      this.ref.close(this.employeeForm.getRawValue());
+    }
   }
 }

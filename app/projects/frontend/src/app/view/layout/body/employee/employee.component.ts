@@ -18,8 +18,6 @@ export class EmployeeComponent {
   employees: Employee[] = employees;
   selectedEmployees: Employee[] = [];
 
-  submitted?: boolean;
-
   /**
    * constructor
    *
@@ -37,7 +35,22 @@ export class EmployeeComponent {
    * 新增員工
    */
   openNew() {
-    this.submitted = false;
+    const ref = this.dialogService.open(EmployeeDialogComponent, {
+      header: '新增員工',
+      width: '500px',
+    });
+    ref.onClose.subscribe((employee: Employee) => {
+      if (employee && employee.id) {
+        this.employees.push(employee);
+        this.employees = [...this.employees];
+        this.messageService.add({
+          severity: 'success',
+          summary: '成功',
+          detail: `新增員工 ${employee.name}(${employee.engName})`,
+          life: 3000,
+        });
+      }
+    });
   }
 
   /**

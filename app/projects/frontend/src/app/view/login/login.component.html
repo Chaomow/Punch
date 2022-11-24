@@ -6,7 +6,7 @@
         <div class="title">{{ title }}</div>
       </div>
     </ng-template>
-    <form [formGroup]="loginForm" (ngSubmit)="submit(loginForm.value)">
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
       <div class="mb-4">
         <label for="username">登入帳號</label>
         <input

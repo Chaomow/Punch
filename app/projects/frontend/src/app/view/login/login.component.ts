@@ -33,10 +33,8 @@ export class LoginComponent {
 
   /**
    * 登入
-   *
-   * @param {any} formValue formValue
    */
-  submit(formValue: any): void {
+  submit(): void {
     this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
       this.routeService.go('index');
