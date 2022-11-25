@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from '@environment';
-import { RouteService } from '@libs/service/route.service';
 import { MenuItem } from 'primeng/api';
-import { MessageService } from 'primeng/api';
 
 /**
  * LayoutComponent

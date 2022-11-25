@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { employees } from '@libs/data/employee';
-import { EmployeeDialogComponent } from '@frontend/view/layout/body/employee/employee-dialog/employee-dialog.component';
+import { EmployeeDialogComponent } from '@frontend/view/layout/admin/employee/employee-dialog/employee-dialog.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Employee } from '@libs/interface/employee-interface';

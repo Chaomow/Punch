@@ -14,12 +14,13 @@ export class MenuComponent implements OnInit {
   @ViewChild('menu') menu!: ElementRef<any>;
   @ViewChild('mask') mask!: ElementRef<any>;
   items: MenuItem[] = [];
+  role: 'admnin' | 'employee' = 'employee';
 
   /**
    * constructor
    *
    * @param {MessageService} messageService 訊息
-   * @param {RouteServiceService} routeService 路由
+   * @param {RouteService} routeService 路由
    */
   constructor(
     private messageService: MessageService,
@@ -30,18 +31,44 @@ export class MenuComponent implements OnInit {
    * ngOnInit
    */
   ngOnInit() {
-    this.items = [
+    // 員工選單
+    const employeeMenu: MenuItem[] = [
+      {
+        label: '今日出勤',
+        icon: 'pi pi-clock',
+        routerLink: 'employee/punch',
+        command: this.command,
+      },
+      {
+        label: '出勤紀錄',
+        icon: 'pi pi-file',
+        routerLink: 'employee/attendance',
+        command: this.command,
+      },
+    ];
+    // 管理員選單
+    const adminMenu: MenuItem[] = [
       {
         label: '員工管理',
         icon: 'pi pi-users',
-        routerLink: 'employee',
-        /**
-         * command
-         */
-        command: () => {
-          this.hideMenu();
-        },
+        routerLink: 'admin/employee',
+        command: this.command,
       },
+      {
+        label: '出勤管理',
+        icon: 'pi pi-clock',
+        routerLink: 'admin/attendance',
+        command: this.command,
+      },
+      {
+        label: '參數設定',
+        icon: 'pi pi-cog',
+        routerLink: 'admin/config',
+        command: this.command,
+      },
+    ];
+    // 共用選單
+    const commonMenu: MenuItem[] = [
       {
         label: '登出',
         icon: 'pi pi-sign-out',
@@ -59,7 +86,22 @@ export class MenuComponent implements OnInit {
         },
       },
     ];
+    switch (this.role) {
+      case 'admnin':
+        this.items = [...adminMenu, ...commonMenu];
+        break;
+      case 'employee':
+        this.items = [...employeeMenu, ...commonMenu];
+        break;
+    }
   }
+
+  /**
+   * hideMenu
+   */
+  command = () => {
+    this.hideMenu();
+  };
 
   /**
    * 點擊漢堡條
