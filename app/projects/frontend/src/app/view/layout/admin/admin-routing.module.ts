@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EmployeeComponent } from './employee/employee.component';
-import { AttendanceComponent } from '../common/attendance/attendance.component';
-import { ConfigComponent } from './config/config.component';
+import { EmployeeComponent } from '@frontend/view/layout/admin/employee/employee.component';
+import { AttendanceComponent } from '@frontend/view/layout/common/attendance/attendance.component';
+import { ConfigComponent } from '@frontend/view/layout/admin/config/config.component';
 
 const routes: Routes = [
   {

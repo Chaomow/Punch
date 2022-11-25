@@ -15,7 +15,10 @@
           type="text"
           class="w-full"
           [ngClass]="
-            loginForm.controls['username'].errors ? 'ng-invalid ng-dirty' : ''
+            loginForm.controls['password'].touched &&
+            loginForm.controls['password'].errors
+              ? 'ng-invalid ng-dirty'
+              : ''
           "
           formControlName="username"
           placeholder="請輸入帳號"
@@ -38,7 +41,10 @@
           type="password"
           class="w-full"
           [ngClass]="
-            loginForm.controls['password'].errors ? 'ng-invalid ng-dirty' : ''
+            loginForm.controls['password'].touched &&
+            loginForm.controls['password'].errors
+              ? 'ng-invalid ng-dirty'
+              : ''
           "
           formControlName="password"
           placeholder="請輸入密碼"

@@ -1,4 +1,22 @@
+import { Reason } from '@libs/enum/config-enum';
 import { Holiday, WorkingPeriod } from '@libs/interface/config-interface';
+import { CommonOption } from '@libs/interface/dropdown-interface';
+
+/**
+ * 補登原因選單
+ *
+ * @returns {*} 補登原因選單
+ */
+export const reasonOptions = (): CommonOption[] => {
+  const list: CommonOption[] = [];
+  for (const key in Reason) {
+    list.push({
+      name: Reason[key as keyof typeof Reason],
+      code: key,
+    });
+  }
+  return list;
+};
 
 /**
  * 上下班時間

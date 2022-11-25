@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PublicModule } from '@libs/module/public.module';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './view/login/login.component';
-import { NotFoundComponent } from './view/not-found/not-found.component';
+import { AppRoutingModule } from '@frontend/app-routing.module';
+import { AppComponent } from '@frontend/app.component';
+import { LoginComponent } from '@frontend/view/login/login.component';
+import { NotFoundComponent } from '@frontend/view/not-found/not-found.component';
+import { IndexComponent } from '@frontend/view/layout/common/index/index.component';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 
@@ -22,7 +23,12 @@ export function playerFactory() {
  * @class AppModule
  */
 @NgModule({
-  declarations: [AppComponent, LoginComponent, NotFoundComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    NotFoundComponent,
+    IndexComponent,
+  ],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,

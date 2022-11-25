@@ -43,19 +43,29 @@
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="id" style="min-width: 5rem">
-            員編 <p-sortIcon field="id"></p-sortIcon>
+            <div class="flex justify-content-center align-items-center">
+              員編 <p-sortIcon field="id"></p-sortIcon>
+            </div>
           </th>
           <th pSortableColumn="dept" style="min-width: 5rem">
-            部門 <p-sortIcon field="dept"></p-sortIcon>
+            <div class="flex justify-content-center align-items-center">
+              部門 <p-sortIcon field="dept"></p-sortIcon>
+            </div>
           </th>
           <th pSortableColumn="name" style="min-width: 5rem">
-            姓名 <p-sortIcon field="name"></p-sortIcon>
+            <div class="flex justify-content-center align-items-center">
+              姓名 <p-sortIcon field="name"></p-sortIcon>
+            </div>
           </th>
           <th pSortableColumn="engName" style="min-width: 5rem">
-            英文姓名 <p-sortIcon field="engName"></p-sortIcon>
+            <div class="flex justify-content-center align-items-center">
+              英文姓名 <p-sortIcon field="engName"></p-sortIcon>
+            </div>
           </th>
           <th pSortableColumn="level" style="min-width: 5rem">
-            職稱 <p-sortIcon field="level"></p-sortIcon>
+            <div class="flex justify-content-center align-items-center">
+              職稱 <p-sortIcon field="level"></p-sortIcon>
+            </div>
           </th>
           <th></th>
         </tr>
@@ -64,23 +74,33 @@
         <tr>
           <td>
             <span class="p-column-title font-bold">員編</span>
-            {{ employee.id }}
+            <div class="flex justify-content-center align-items-center">
+              {{ employee.id }}
+            </div>
           </td>
           <td>
             <span class="p-column-title font-bold">部門</span>
-            {{ employee.dept | department }}
+            <div class="flex justify-content-center align-items-center">
+              {{ employee.dept | department }}
+            </div>
           </td>
           <td>
             <span class="p-column-title font-bold">姓名</span>
-            {{ employee.name }}
+            <div class="flex justify-content-center align-items-center">
+              {{ employee.name }}
+            </div>
           </td>
           <td>
             <span class="p-column-title font-bold">英文姓名</span>
-            {{ employee.engName }}
+            <div class="flex justify-content-center align-items-center">
+              {{ employee.engName }}
+            </div>
           </td>
           <td>
             <span class="p-column-title font-bold">職稱</span>
-            {{ employee.level | employeeLevel }}
+            <div class="flex justify-content-center align-items-center">
+              {{ employee.level | employeeLevel }}
+            </div>
           </td>
           <td class="text-center">
             <button

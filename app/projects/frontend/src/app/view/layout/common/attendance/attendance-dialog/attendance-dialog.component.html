@@ -1,0 +1,116 @@
+<form [formGroup]="attendanceForm" (ngSubmit)="submit()">
+  <div class="p-fluid">
+    <div class="field mb-4">
+      <label for="date">日期</label>
+      <p-calendar
+        inputId="date"
+        [ngClass]="
+          attendanceForm.controls['date'].touched &&
+          attendanceForm.controls['date'].errors
+            ? 'ng-invalid ng-dirty'
+            : ''
+        "
+        formControlName="date"
+        placeholder="請輸入日期"
+        dateFormat="yy/mm/dd"
+        appendTo="body"
+      ></p-calendar>
+      <small
+        class="p-error block absolute"
+        *ngIf="
+          attendanceForm.controls['date'].touched &&
+          attendanceForm.controls['date'].errors
+        "
+      >
+        請輸入日期
+      </small>
+    </div>
+    <div class="field mb-4">
+      <label for="type">補登</label>
+      <p-selectButton
+        [options]="punchTypeOptions"
+        optionLabel="name"
+        formControlName="type"
+        [ngClass]="
+          attendanceForm.controls['type'].touched &&
+          attendanceForm.controls['type'].errors
+            ? 'ng-invalid ng-dirty'
+            : ''
+        "
+      ></p-selectButton>
+      <small
+        class="p-error block absolute"
+        *ngIf="
+          attendanceForm.controls['type'].touched &&
+          attendanceForm.controls['type'].errors
+        "
+      >
+        請選擇補登上班或下班
+      </small>
+    </div>
+    <div class="field mb-4">
+      <label for="time">打卡時間</label>
+      <p-calendar
+        [timeOnly]="true"
+        inputId="time"
+        [ngClass]="
+          attendanceForm.controls['time'].touched &&
+          attendanceForm.controls['time'].errors
+            ? 'ng-invalid ng-dirty'
+            : ''
+        "
+        formControlName="time"
+        placeholder="請輸入時間"
+        appendTo="body"
+      ></p-calendar>
+      <small
+        class="p-error block absolute"
+        *ngIf="
+          attendanceForm.controls['time'].touched &&
+          attendanceForm.controls['time'].errors
+        "
+      >
+        請輸入時間
+      </small>
+    </div>
+    <div class="field mb-4">
+      <label for="level">補登原因</label>
+      <p-dropdown
+        [options]="reasonList"
+        [autoDisplayFirst]="false"
+        formControlName="reason"
+        optionLabel="name"
+        optionValue="code"
+        placeholder="請選擇補登原因"
+        appendTo="body"
+        [ngClass]="
+          attendanceForm.controls['reason'].touched &&
+          attendanceForm.controls['reason'].errors
+            ? 'ng-invalid ng-dirty'
+            : ''
+        "
+      >
+      </p-dropdown>
+      <small
+        class="p-error block absolute"
+        *ngIf="
+          attendanceForm.controls['reason'].touched &&
+          attendanceForm.controls['reason'].errors
+        "
+      >
+        請選擇補登原因
+      </small>
+    </div>
+  </div>
+
+  <div class="mt-8 flex justify-content-end">
+    <button
+      pButton
+      pRipple
+      label="儲存"
+      icon="pi pi-check"
+      class="p-button-raised p-button-text"
+      type="submit"
+    ></button>
+  </div>
+</form>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { levelOptions, deptOptions } from '@libs/data/employee';
-import { DropdownOption } from '@libs/interface/dropdown-interface';
+import { CommonOption } from '@libs/interface/dropdown-interface';
 import { Employee } from '@libs/interface/employee-interface';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 
@@ -22,8 +22,8 @@ export class EmployeeDialogComponent implements OnInit {
     level: new FormControl('', Validators.required),
   });
   employee!: Employee;
-  levelList!: DropdownOption[];
-  deptList!: DropdownOption[];
+  levelList!: CommonOption[];
+  deptList!: CommonOption[];
 
   /**
    * constructor

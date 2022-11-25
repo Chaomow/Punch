@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AnimationOptions } from 'ngx-lottie';
 
 /**
  * 首頁
@@ -8,4 +9,8 @@ import { Component } from '@angular/core';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
 })
-export class IndexComponent {}
+export class IndexComponent {
+  options: AnimationOptions = {
+    path: '/assets/lottie/welcome.json',
+  };
+}

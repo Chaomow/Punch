@@ -1,5 +1,5 @@
 import { Department, Level } from '@libs/enum/employee-enum';
-import { DropdownOption } from '@libs/interface/dropdown-interface';
+import { CommonOption } from '@libs/interface/dropdown-interface';
 import { Employee } from '@libs/interface/employee-interface';
 
 /**
@@ -7,8 +7,8 @@ import { Employee } from '@libs/interface/employee-interface';
  *
  * @returns {*} 職稱選單
  */
-export const levelOptions = (): DropdownOption[] => {
-  const list: DropdownOption[] = [];
+export const levelOptions = (): CommonOption[] => {
+  const list: CommonOption[] = [];
   for (const key in Level) {
     list.push({
       name: Level[key as keyof typeof Level],
@@ -23,8 +23,8 @@ export const levelOptions = (): DropdownOption[] => {
  *
  * @returns {*} 職稱選單
  */
-export const deptOptions = (): DropdownOption[] => {
-  const list: DropdownOption[] = [];
+export const deptOptions = (): CommonOption[] => {
+  const list: CommonOption[] = [];
   for (const key in Department) {
     list.push({
       name: Department[key as keyof typeof Department],

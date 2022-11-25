@@ -71,13 +71,13 @@ export class EmployeeComponent {
       width: '500px',
       data: employee,
     });
-    ref.onClose.subscribe((employee: Employee) => {
-      if (employee && employee.id) {
-        this.employees[this.findIndexById(employee.id)] = employee;
+    ref.onClose.subscribe((e: Employee) => {
+      if (e && e.id) {
+        this.employees[this.findIndexById(e.id)] = e;
         this.messageService.add({
           severity: 'success',
           summary: '成功',
-          detail: `儲存員工 ${employee.name}(${employee.engName})`,
+          detail: `儲存員工 ${e.name}(${e.engName})`,
           life: 3000,
         });
       }

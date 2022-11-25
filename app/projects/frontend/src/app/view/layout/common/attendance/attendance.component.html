@@ -1,1 +1,101 @@
-<div class="main-content"></div>
+<div class="main-content">
+  <p-card styleClass="main-p-card">
+    <p-table
+      #dt
+      [value]="attendances"
+      [rows]="10"
+      [paginator]="true"
+      [rowHover]="true"
+      responsiveLayout="stack"
+      dataKey="id"
+      styleClass="p-datatable-sm"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex flex-column xl:flex-row xl:justify-content-between">
+          <h2 class="m-0">{{ title }}</h2>
+          <div class="mt-3" style="width: 300px">
+            <p-dropdown
+              [options]="employeeOptions"
+              [autoDisplayFirst]="false"
+              optionLabel="name"
+              optionValue="code"
+              placeholder="請選擇員工"
+              appendTo="body"
+              [filter]="true"
+              styleClass="w-full"
+            >
+            </p-dropdown>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="date" style="min-width: 5rem">
+            <div class="flex justify-content-center align-items-center">
+              日期
+              <p-columnFilter
+                type="date"
+                field="date"
+                display="menu"
+              ></p-columnFilter>
+            </div>
+          </th>
+          <th pSortableColumn="start" style="min-width: 5rem">
+            <div class="flex justify-content-center align-items-center">
+              上班打卡
+            </div>
+          </th>
+          <th pSortableColumn="end" style="min-width: 5rem">
+            <div class="flex justify-content-center align-items-center">
+              下班打卡
+            </div>
+          </th>
+          <th pSortableColumn="reason" style="min-width: 5rem">
+            <div class="flex justify-content-center align-items-center">
+              補登原因
+            </div>
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-attendance>
+        <tr>
+          <td>
+            <span class="p-column-title font-bold">日期</span>
+            <div class="flex justify-content-center align-items-center">
+              {{ attendance.date | date: "yyyy/MM/dd" }}
+            </div>
+          </td>
+          <td>
+            <span class="p-column-title font-bold">上班打卡</span>
+            <div class="flex justify-content-center align-items-center">
+              {{ attendance.start | date: "hh:mm" }}
+            </div>
+          </td>
+          <td>
+            <span class="p-column-title font-bold">下班打卡</span>
+            <div class="flex justify-content-center align-items-center">
+              {{ attendance.end | date: "hh:mm" }}
+            </div>
+          </td>
+          <td>
+            <span class="p-column-title font-bold">補登原因</span>
+            <div class="flex justify-content-center align-items-center">
+              {{ attendance.reason | reason }}
+            </div>
+          </td>
+          <td class="text-center">
+            <button
+              pButton
+              pRipple
+              icon="pi pi-clock"
+              class="p-button-rounded p-button-text p-button-raised p-button-info mr-2"
+              label="出勤補登"
+              (click)="fixAttendance(attendance)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PunchComponent } from './punch/punch.component';
-import { AttendanceComponent } from '../common/attendance/attendance.component';
+import { PunchComponent } from '@frontend/view/layout/employee/punch/punch.component';
+import { AttendanceComponent } from '@frontend/view/layout/common/attendance/attendance.component';
 
 const routes: Routes = [
   {

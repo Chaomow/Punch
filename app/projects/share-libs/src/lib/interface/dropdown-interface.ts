@@ -1,7 +1,7 @@
 /**
- * 下拉式選單
+ * 選單
  */
-export interface DropdownOption {
+export interface CommonOption {
   name: string;
   code: string;
 }

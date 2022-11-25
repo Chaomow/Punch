@@ -1,7 +1,7 @@
 /**
  * 補登原因
  */
-export enum reason {
+export enum Reason {
   Forget = '忘記打卡',
   Errand = '出差/受訓',
   Meeting = '會議',

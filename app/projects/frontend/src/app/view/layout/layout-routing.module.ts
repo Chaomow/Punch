@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '@frontend/view/layout/layout.component';
+import { IndexComponent } from '@frontend/view/layout/common/index/index.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     children: [
+      { path: '', redirectTo: 'index', pathMatch: 'full' },
+      { path: 'index', component: IndexComponent },
       {
         path: 'admin',
         /**

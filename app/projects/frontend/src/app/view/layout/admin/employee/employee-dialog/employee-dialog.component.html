@@ -1,118 +1,136 @@
 <form [formGroup]="employeeForm" (ngSubmit)="submit()">
-  <div class="mb-4">
-    <label for="id">員編</label>
-    <input
-      pInputText
-      id="id"
-      type="text"
-      class="w-full"
-      [ngClass]="
-        employeeForm.controls['id'].errors ? 'ng-invalid ng-dirty' : ''
-      "
-      formControlName="id"
-      placeholder="請輸入員編"
-    />
-    <small
-      class="p-error block absolute"
-      *ngIf="
-        employeeForm.controls['id'].touched &&
-        employeeForm.controls['id'].errors
-      "
-    >
-      請輸入員編
-    </small>
-  </div>
-  <div class="mb-4">
-    <label for="dept">部門</label>
-    <p-dropdown
-      [options]="deptList"
-      [autoDisplayFirst]="false"
-      formControlName="dept"
-      optionLabel="name"
-      optionValue="code"
-      styleClass="w-full"
-      placeholder="請選擇部門"
-      appendTo="body"
-    >
-    </p-dropdown>
-    <small
-      class="p-error block absolute"
-      *ngIf="
-        employeeForm.controls['dept'].touched &&
-        employeeForm.controls['dept'].errors
-      "
-    >
-      請選擇部門
-    </small>
-  </div>
-  <div class="mb-4">
-    <label for="name">姓名</label>
-    <input
-      pInputText
-      id="name"
-      type="text"
-      class="w-full"
-      [ngClass]="
-        employeeForm.controls['name'].errors ? 'ng-invalid ng-dirty' : ''
-      "
-      formControlName="name"
-      placeholder="請輸入姓名"
-    />
-    <small
-      class="p-error block absolute"
-      *ngIf="
-        employeeForm.controls['name'].touched &&
-        employeeForm.controls['name'].errors
-      "
-    >
-      請輸入姓名
-    </small>
-  </div>
-  <div class="mb-4">
-    <label for="engName">英文姓名</label>
-    <input
-      pInputText
-      id="engName"
-      type="text"
-      class="w-full"
-      [ngClass]="
-        employeeForm.controls['engName'].errors ? 'ng-invalid ng-dirty' : ''
-      "
-      formControlName="engName"
-      placeholder="請輸入英文姓名"
-    />
-    <small
-      class="p-error block absolute"
-      *ngIf="
-        employeeForm.controls['engName'].touched &&
-        employeeForm.controls['engName'].errors
-      "
-    >
-      請輸入英文姓名
-    </small>
-  </div>
-  <div class="mb-4">
-    <label for="level">職稱</label>
-    <p-dropdown
-      [options]="levelList"
-      [autoDisplayFirst]="false"
-      formControlName="level"
-      optionLabel="name"
-      optionValue="code"
-      styleClass="w-full"
-      placeholder="請選擇職稱"
-      appendTo="body"
-    >
-    </p-dropdown>
-    <small
-      class="p-error block absolute"
-      *ngIf="
-        employeeForm.controls['level'].touched &&
-        employeeForm.controls['level'].errors
-      "
-    >
-      請選擇職稱
-    </small>
+  <div class="p-fluid">
+    <div class="field mb-4">
+      <label for="id">員編</label>
+      <input
+        pInputText
+        id="id"
+        type="text"
+        [ngClass]="
+          employeeForm.controls['id'].touched &&
+          employeeForm.controls['id'].errors
+            ? 'ng-invalid ng-dirty'
+            : ''
+        "
+        formControlName="id"
+        placeholder="請輸入員編"
+      />
+      <small
+        class="p-error block absolute"
+        *ngIf="
+          employeeForm.controls['id'].touched &&
+          employeeForm.controls['id'].errors
+        "
+      >
+        請輸入員編
+      </small>
+    </div>
+    <div class="field mb-4">
+      <label for="dept">部門</label>
+      <p-dropdown
+        [options]="deptList"
+        [autoDisplayFirst]="false"
+        formControlName="dept"
+        optionLabel="name"
+        optionValue="code"
+        placeholder="請選擇部門"
+        appendTo="body"
+        [ngClass]="
+          employeeForm.controls['id'].touched &&
+          employeeForm.controls['id'].errors
+            ? 'ng-invalid ng-dirty'
+            : ''
+        "
+      >
+      </p-dropdown>
+      <small
+        class="p-error block absolute"
+        *ngIf="
+          employeeForm.controls['dept'].touched &&
+          employeeForm.controls['dept'].errors
+        "
+      >
+        請選擇部門
+      </small>
+    </div>
+    <div class="field mb-4">
+      <label for="name">姓名</label>
+      <input
+        pInputText
+        id="name"
+        type="text"
+        [ngClass]="
+          employeeForm.controls['name'].touched &&
+          employeeForm.controls['name'].errors
+            ? 'ng-invalid ng-dirty'
+            : ''
+        "
+        formControlName="name"
+        placeholder="請輸入姓名"
+      />
+      <small
+        class="p-error block absolute"
+        *ngIf="
+          employeeForm.controls['name'].touched &&
+          employeeForm.controls['name'].errors
+        "
+      >
+        請輸入姓名
+      </small>
+    </div>
+    <div class="field mb-4">
+      <label for="engName">英文姓名</label>
+      <input
+        pInputText
+        id="engName"
+        type="text"
+        [ngClass]="
+          employeeForm.controls['engName'].touched &&
+          employeeForm.controls['engName'].errors
+            ? 'ng-invalid ng-dirty'
+            : ''
+        "
+        formControlName="engName"
+        placeholder="請輸入英文姓名"
+      />
+      <small
+        class="p-error block absolute"
+        *ngIf="
+          employeeForm.controls['engName'].touched &&
+          employeeForm.controls['engName'].errors
+        "
+      >
+        請輸入英文姓名
+      </small>
+    </div>
+    <div class="field mb-4">
+      <label for="level">職稱</label>
+      <p-dropdown
+        [options]="levelList"
+        [autoDisplayFirst]="false"
+        formControlName="level"
+        optionLabel="name"
+        optionValue="code"
+        placeholder="請選擇職稱"
+        appendTo="body"
+        [ngClass]="
+          employeeForm.controls['id'].touched &&
+          employeeForm.controls['id'].errors
+            ? 'ng-invalid ng-dirty'
+            : ''
+        "
+      >
+      </p-dropdown>
+      <small
+        class="p-error block absolute"
+        *ngIf="
+          employeeForm.controls['level'].touched &&
+          employeeForm.controls['level'].errors
+        "
+      >
+        請選擇職稱
+      </small>
+    </div>
   </div>
 
   <div class="mt-8 flex justify-content-end">

@@ -16,6 +16,8 @@ import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { CalendarModule } from 'primeng/calendar';
 
 /**
  * PublicModule
@@ -40,6 +42,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     DropdownModule,
     ConfirmDialogModule,
     DynamicDialogModule,
+    SelectButtonModule,
+    CalendarModule,
   ],
   exports: [
     FormsModule,
@@ -58,6 +62,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     DropdownModule,
     ConfirmDialogModule,
     DynamicDialogModule,
+    SelectButtonModule,
+    CalendarModule,
   ],
 })
 export class PublicModule {}
