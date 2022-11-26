@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { periodOptions, reasonOptions } from '@libs/data/config';
+import {
+  holidayOptions,
+  periodOptions,
+  reasonOptions,
+  roleOptions,
+} from '@libs/data/config';
 import { deptOptions, levelOptions } from '@libs/data/employee';
 import { CommonOption } from '@libs/interface/dropdown-interface';
 
@@ -20,20 +25,28 @@ export class ConfigComponent implements OnInit {
   // 功能選項
   configOptions: CommonOption[] = [
     {
-      name: '補登原因',
+      code: 'role',
+      name: '系統角色',
+    },
+    {
       code: 'reason',
+      name: '補登原因',
     },
     {
-      name: '部門',
       code: 'department',
+      name: '部門',
     },
     {
-      name: '職稱',
       code: 'level',
+      name: '職稱',
     },
     {
-      name: '工作時段',
       code: 'period',
+      name: '工作時段',
+    },
+    {
+      code: 'holiday',
+      name: '國定假日',
     },
   ];
   consfigList!: CommonOption[];
@@ -64,13 +77,21 @@ export class ConfigComponent implements OnInit {
         this.consfigList = levelOptions();
         break;
       case 'reason':
-      default:
         this.consfigList = reasonOptions();
+        break;
+      case 'holiday':
+        this.consfigList = holidayOptions();
+        break;
+      case 'role':
+      default:
+        this.consfigList = roleOptions();
     }
   }
 
   /**
    * 儲存
    */
-  submit() {}
+  submit() {
+    // TODO
+  }
 }

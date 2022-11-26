@@ -7,7 +7,18 @@ export interface WorkingPeriod {
   end: string;
 }
 
+/**
+ * 國定假日
+ */
 export interface Holiday {
   title: string;
   dates: Date[];
+}
+
+/**
+ * 角色
+ */
+export interface Role {
+  id: string;
+  level: 'admin' | 'employee';
 }

@@ -1,3 +1,4 @@
+import { Role } from '@libs/enum/config-enum';
 import { PunchReason } from '@libs/enum/punch-enum';
 import { Holiday, WorkingPeriod } from '@libs/interface/config-interface';
 import { CommonOption } from '@libs/interface/dropdown-interface';
@@ -28,6 +29,44 @@ export const periodOptions = (): CommonOption[] => {
     code: p.group,
     name: `${p.start}-${p.end}`,
   }));
+};
+
+/**
+ * 角色選單
+ *
+ * @returns {*} 角色選單
+ */
+export const roleOptions = (): CommonOption[] => {
+  const list: CommonOption[] = [];
+  for (const key in Role) {
+    list.push({
+      code: key,
+      name: Role[key as keyof typeof Role],
+    });
+  }
+  return list;
+};
+
+/**
+ * 國定假日選單
+ *
+ * @returns {*} 國定假日選單
+ */
+export const holidayOptions = (): CommonOption[] => {
+  return holidays.flatMap((h) =>
+    h.dates.map((d) => {
+      const temp = new Date(d);
+      const date = {
+        year: temp.getFullYear(),
+        month: ('0' + (temp.getMonth() + 1)).slice(-2),
+        date: ('0' + temp.getDate()).slice(-2),
+      };
+      return {
+        code: h.title,
+        name: `${date.year}/${date.month}/${date.date}`,
+      };
+    })
+  );
 };
 
 /**
