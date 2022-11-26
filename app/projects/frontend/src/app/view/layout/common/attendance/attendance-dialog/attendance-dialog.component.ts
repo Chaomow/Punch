@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { reasonOptions } from '@libs/data/config';
+import { reasonOptions } from '@libs/data/punch';
 import { CommonOption } from '@libs/interface/dropdown-interface';
 import { Attendance } from '@libs/interface/punch-interface';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';

@@ -12,4 +12,6 @@ export interface Employee {
   engName?: string;
   // 職稱
   level?: string;
+  // 時段群組
+  group?: string;
 }

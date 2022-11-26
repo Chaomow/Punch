@@ -52,7 +52,7 @@ export class EmployeeComponent implements OnInit {
     });
     ref.onClose.subscribe((employee: Employee) => {
       if (employee && employee.id) {
-        this.employees.push(employee);
+        this.employees.unshift(employee);
         this.employees = [...this.employees];
         this.messageService.add({
           severity: 'success',

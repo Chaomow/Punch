@@ -9,8 +9,8 @@
               #configPick
               [options]="configOptions"
               [autoDisplayFirst]="true"
-              optionLabel="name"
-              optionValue="code"
+              optionLabel="label"
+              optionValue="value"
               appendTo="body"
               styleClass="w-full"
               (onChange)="changeConfig(configPick.value)"
@@ -70,7 +70,7 @@
                     <input pInputText type="text" class="p-inputtext-sm" />
                   </ng-template>
                   <ng-template pTemplate="output"> -->
-                {{ config.code }}
+                {{ config.value }}
                 <!-- </ng-template>
                 </p-cellEditor> -->
               </div>
@@ -83,7 +83,7 @@
                     <input pInputText type="text" class="p-inputtext-sm" />
                   </ng-template> -->
                 <!-- <ng-template pTemplate="output"> -->
-                {{ config.name }}
+                {{ config.label }}
                 <!-- </ng-template>
                 </p-cellEditor> -->
               </div>

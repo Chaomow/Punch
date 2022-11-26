@@ -2,7 +2,7 @@
  * 上下班時間
  */
 export interface WorkingPeriod {
-  group: string;
+  name: string;
   start: string;
   end: string;
 }

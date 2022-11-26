@@ -1,35 +1,6 @@
 import { Role } from '@libs/enum/config-enum';
-import { PunchReason } from '@libs/enum/punch-enum';
-import { Holiday, WorkingPeriod } from '@libs/interface/config-interface';
+import { Holiday } from '@libs/interface/config-interface';
 import { CommonOption } from '@libs/interface/dropdown-interface';
-
-/**
- * 補登原因選單
- *
- * @returns {*} 補登原因選單
- */
-export const reasonOptions = (): CommonOption[] => {
-  const list: CommonOption[] = [];
-  for (const key in PunchReason) {
-    list.push({
-      code: key,
-      name: PunchReason[key as keyof typeof PunchReason],
-    });
-  }
-  return list;
-};
-
-/**
- * 上下班時間選單
- *
- * @returns {*} 上下班時間選單
- */
-export const periodOptions = (): CommonOption[] => {
-  return workingPeriods.map((p) => ({
-    code: p.group,
-    name: `${p.start}-${p.end}`,
-  }));
-};
 
 /**
  * 角色選單
@@ -40,8 +11,8 @@ export const roleOptions = (): CommonOption[] => {
   const list: CommonOption[] = [];
   for (const key in Role) {
     list.push({
-      code: key,
-      name: Role[key as keyof typeof Role],
+      value: key,
+      label: Role[key as keyof typeof Role],
     });
   }
   return list;
@@ -62,33 +33,12 @@ export const holidayOptions = (): CommonOption[] => {
         date: ('0' + temp.getDate()).slice(-2),
       };
       return {
-        code: h.title,
-        name: `${date.year}/${date.month}/${date.date}`,
+        value: h.title,
+        label: `${date.year}/${date.month}/${date.date}`,
       };
     })
   );
 };
-
-/**
- * 上下班時間
- */
-export const workingPeriods: WorkingPeriod[] = [
-  {
-    group: 'group1',
-    start: '08:30',
-    end: '17:00',
-  },
-  {
-    group: 'group2',
-    start: '09:00',
-    end: '17:30',
-  },
-  {
-    group: 'group3',
-    start: '09:30',
-    end: '18:00',
-  },
-];
 
 /**
  * 國定假日

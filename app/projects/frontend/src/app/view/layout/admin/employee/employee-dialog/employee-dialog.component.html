@@ -31,8 +31,8 @@
         [options]="deptList"
         [autoDisplayFirst]="false"
         formControlName="dept"
-        optionLabel="name"
-        optionValue="code"
+        optionLabel="label"
+        optionValue="value"
         placeholder="請選擇部門"
         appendTo="body"
         [ngClass]="
@@ -109,8 +109,8 @@
         [options]="levelList"
         [autoDisplayFirst]="false"
         formControlName="level"
-        optionLabel="name"
-        optionValue="code"
+        optionLabel="label"
+        optionValue="value"
         placeholder="請選擇職稱"
         appendTo="body"
         [ngClass]="
@@ -126,6 +126,34 @@
         *ngIf="
           employeeForm.controls['level'].touched &&
           employeeForm.controls['level'].errors
+        "
+      >
+        請選擇職稱
+      </small>
+    </div>
+    <div class="field mb-4">
+      <label for="period">工作時段</label>
+      <p-dropdown
+        [options]="groupList"
+        [autoDisplayFirst]="false"
+        formControlName="group"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="請選擇工作時段"
+        appendTo="body"
+        [ngClass]="
+          employeeForm.controls['group'].touched &&
+          employeeForm.controls['group'].errors
+            ? 'ng-invalid ng-dirty'
+            : ''
+        "
+      >
+      </p-dropdown>
+      <small
+        class="p-error block absolute"
+        *ngIf="
+          employeeForm.controls['group'].touched &&
+          employeeForm.controls['group'].errors
         "
       >
         請選擇職稱

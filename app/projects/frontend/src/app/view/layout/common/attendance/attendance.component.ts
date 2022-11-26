@@ -52,8 +52,8 @@ export class AttendanceComponent implements OnInit {
     employees.forEach((employee) => {
       if (employee && employee.id && employee.name) {
         this.employeeOptions.push({
-          name: `${employee.id}-${employee.name}(${employee.engName})`,
-          code: employee.id,
+          value: employee.id,
+          label: `${employee.id}-${employee.name}(${employee.engName})`,
         });
       }
     });
@@ -88,9 +88,9 @@ export class AttendanceComponent implements OnInit {
   changeEmployee() {
     // Title
     this.employeeOption = this.employeeOptions.filter(
-      (e) => e.code === this.employeePick
+      (e) => e.value === this.employeePick
     )[0];
-    this.title = `出勤紀錄：${this.employeeOption.name}`;
+    this.title = `出勤紀錄：${this.employeeOption.label}`;
     this.changeMonth();
   }
 
