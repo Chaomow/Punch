@@ -4,3 +4,12 @@
     width: 300px;
   }
 }
+
+@media screen and (max-width: 960px) {
+  .toolbar-option {
+    width: 250px;
+    .toolbar-employee {
+      width: 200px;
+    }
+  }
+}
