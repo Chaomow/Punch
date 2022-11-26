@@ -157,7 +157,7 @@ export class AttendanceComponent implements OnInit {
     const work =
       attendance.type === 'Work' ? PunchType.Work : PunchType.Offwork;
     const ref = this.dialogService.open(AttendanceDialogComponent, {
-      header: `${attendance.date}${work}補登作業`,
+      header: `${this.util.formatDate(attendance.date)} ${work}補登作業`,
       width: '500px',
       data: attendance,
     });

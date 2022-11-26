@@ -57,7 +57,7 @@ export class UtilService {
    * @param {string} format 日期格式
    * @returns {string} Date 日期
    */
-  ngFormatDate(value: string | number | Date, format?: string): string {
+  formatDate(value: string | number | Date, format?: string): string {
     return formatDate(new Date(value), format || 'yyyy/MM/dd', this.locale);
   }
 }
