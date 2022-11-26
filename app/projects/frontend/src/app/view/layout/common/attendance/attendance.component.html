@@ -1,5 +1,37 @@
 <div class="main-content">
   <p-card styleClass="main-p-card">
+    <p-toolbar styleClass="mb-4 gap-2">
+      <ng-template pTemplate="left">
+        <div class="toolbar-option">
+          <span class="pr-2">月份</span>
+          <p-calendar
+            view="month"
+            dateFormat="yy/mm"
+            [readonlyInput]="true"
+            inputId="monthpicker"
+            [(ngModel)]="monthPick"
+            (onSelect)="changeMonth()"
+          ></p-calendar>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="right">
+        <div class="toolbar-option">
+          <p-dropdown
+            [options]="employeeOptions"
+            [autoDisplayFirst]="false"
+            optionLabel="name"
+            optionValue="code"
+            placeholder="請選擇員工"
+            appendTo="body"
+            styleClass="w-full"
+            [filter]="true"
+            [(ngModel)]="employeePick"
+            (onChange)="changeEmployee()"
+          >
+          </p-dropdown>
+        </div>
+      </ng-template>
+    </p-toolbar>
     <p-table
       #dt
       [value]="attendances"
@@ -13,19 +45,6 @@
       <ng-template pTemplate="caption">
         <div class="flex flex-column xl:flex-row xl:justify-content-between">
           <h2 class="m-0">{{ title }}</h2>
-          <div class="mt-3" style="width: 300px">
-            <p-dropdown
-              [options]="employeeOptions"
-              [autoDisplayFirst]="false"
-              optionLabel="name"
-              optionValue="code"
-              placeholder="請選擇員工"
-              appendTo="body"
-              [filter]="true"
-              styleClass="w-full"
-            >
-            </p-dropdown>
-          </div>
         </div>
       </ng-template>
       <ng-template pTemplate="header">
@@ -40,19 +59,29 @@
               ></p-columnFilter>
             </div>
           </th>
-          <th pSortableColumn="start" style="min-width: 5rem">
+          <th pSortableColumn="type" style="min-width: 5rem">
             <div class="flex justify-content-center align-items-center">
-              上班打卡
+              打卡
             </div>
           </th>
-          <th pSortableColumn="end" style="min-width: 5rem">
+          <th pSortableColumn="time" style="min-width: 5rem">
             <div class="flex justify-content-center align-items-center">
-              下班打卡
+              時間
+            </div>
+          </th>
+          <th pSortableColumn="create" style="min-width: 5rem">
+            <div class="flex justify-content-center align-items-center">
+              建立時間
             </div>
           </th>
           <th pSortableColumn="reason" style="min-width: 5rem">
             <div class="flex justify-content-center align-items-center">
-              補登原因
+              調整原因
+            </div>
+          </th>
+          <th pSortableColumn="modify" style="min-width: 5rem">
+            <div class="flex justify-content-center align-items-center">
+              調整時間
             </div>
           </th>
           <th></th>
@@ -67,21 +96,33 @@
             </div>
           </td>
           <td>
-            <span class="p-column-title font-bold">上班打卡</span>
+            <span class="p-column-title font-bold">打卡</span>
             <div class="flex justify-content-center align-items-center">
-              {{ attendance.start | date: "hh:mm" }}
+              {{ attendance.type | punch: "type" }}
             </div>
           </td>
           <td>
-            <span class="p-column-title font-bold">下班打卡</span>
+            <span class="p-column-title font-bold">時間</span>
             <div class="flex justify-content-center align-items-center">
-              {{ attendance.end | date: "hh:mm" }}
+              {{ attendance.time | date: "HH:mm" }}
             </div>
           </td>
           <td>
-            <span class="p-column-title font-bold">補登原因</span>
+            <span class="p-column-title font-bold">建立時間</span>
             <div class="flex justify-content-center align-items-center">
-              {{ attendance.reason | reason }}
+              {{ attendance.create | date: "yyyy/MM/dd HH:mm" }}
+            </div>
+          </td>
+          <td>
+            <span class="p-column-title font-bold">調整原因</span>
+            <div class="flex justify-content-center align-items-center">
+              {{ attendance.reason | punch: "reason" }}
+            </div>
+          </td>
+          <td>
+            <span class="p-column-title font-bold">調整時間</span>
+            <div class="flex justify-content-center align-items-center">
+              {{ attendance.modify | date: "yyyy/MM/dd HH:mm" }}
             </div>
           </td>
           <td class="text-center">

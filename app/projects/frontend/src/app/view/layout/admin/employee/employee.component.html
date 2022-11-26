@@ -81,7 +81,7 @@
           <td>
             <span class="p-column-title font-bold">部門</span>
             <div class="flex justify-content-center align-items-center">
-              {{ employee.dept | department }}
+              {{ employee.dept | employee: "department" }}
             </div>
           </td>
           <td>
@@ -99,7 +99,7 @@
           <td>
             <span class="p-column-title font-bold">職稱</span>
             <div class="flex justify-content-center align-items-center">
-              {{ employee.level | employeeLevel }}
+              {{ employee.level | employee: "level" }}
             </div>
           </td>
           <td class="text-center">

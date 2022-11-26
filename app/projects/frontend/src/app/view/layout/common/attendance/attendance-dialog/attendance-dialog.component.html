@@ -26,29 +26,6 @@
       </small>
     </div>
     <div class="field mb-4">
-      <label for="type">補登</label>
-      <p-selectButton
-        [options]="punchTypeOptions"
-        optionLabel="name"
-        formControlName="type"
-        [ngClass]="
-          attendanceForm.controls['type'].touched &&
-          attendanceForm.controls['type'].errors
-            ? 'ng-invalid ng-dirty'
-            : ''
-        "
-      ></p-selectButton>
-      <small
-        class="p-error block absolute"
-        *ngIf="
-          attendanceForm.controls['type'].touched &&
-          attendanceForm.controls['type'].errors
-        "
-      >
-        請選擇補登上班或下班
-      </small>
-    </div>
-    <div class="field mb-4">
       <label for="time">打卡時間</label>
       <p-calendar
         [timeOnly]="true"

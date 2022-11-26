@@ -5,6 +5,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Employee } from '@libs/interface/employee-interface';
 import { NegativeConfirm } from '@libs/class/confirmation';
+import { RouteService } from '@libs/service/route.service';
 
 /**
  * 員工清單
@@ -24,11 +25,13 @@ export class EmployeeComponent {
    * @param {MessageService} messageService MessageService
    * @param {ConfirmationService} confirmationService ConfirmationService
    * @param {DialogService} dialogService DialogService
+   * @param {RouteService} routeService 路由
    */
   constructor(
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private routeService: RouteService
   ) {}
 
   /**
@@ -58,7 +61,9 @@ export class EmployeeComponent {
    *
    * @param {any} employee employee
    */
-  openPunch(employee: Employee) {}
+  openPunch(employee: Employee) {
+    this.routeService.go('admin/attendance', { id: employee.id });
+  }
 
   /**
    * 編輯員工

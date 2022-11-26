@@ -21,10 +21,6 @@ export class AttendanceDialogComponent implements OnInit {
     reason: new FormControl('', Validators.required),
   });
   attendance!: Attendance;
-  punchTypeOptions: CommonOption[] = [
-    { name: '上班打卡', code: 'start' },
-    { name: '下班打卡', code: 'end' },
-  ];
   reasonList!: CommonOption[];
 
   /**
@@ -49,6 +45,12 @@ export class AttendanceDialogComponent implements OnInit {
         this.attendance.date
       );
       (this.attendanceForm.get('date') as FormControl).disable();
+      (this.attendanceForm.get('type') as FormControl).setValue(
+        this.attendance.type
+      );
+      (this.attendanceForm.get('time') as FormControl).setValue(
+        this.attendance.time
+      );
       (this.attendanceForm.get('reason') as FormControl).setValue(
         this.attendance.reason
       );
@@ -62,11 +64,13 @@ export class AttendanceDialogComponent implements OnInit {
     this.attendanceForm.markAllAsTouched();
     if (this.attendanceForm.valid) {
       const a = this.attendanceForm.getRawValue();
-      this.ref.close({
+      const data = {
         ...this.attendance,
-        [a.type.code]: a.time,
-        reason: a.reason,
-      });
+        ...a,
+        create: this.attendance.create || new Date(),
+        modify: new Date(),
+      };
+      this.ref.close(data);
     }
   }
 }

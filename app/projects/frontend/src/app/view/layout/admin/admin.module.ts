@@ -5,8 +5,7 @@ import { AdminRoutingModule } from '@frontend/view/layout/admin/admin-routing.mo
 import { EmployeeComponent } from '@frontend/view/layout/admin/employee/employee.component';
 import { EmployeeDialogComponent } from '@frontend/view/layout/admin/employee/employee-dialog/employee-dialog.component';
 import { ConfigComponent } from '@frontend/view/layout/admin/config/config.component';
-import { EmployeeLevelPipe } from '@libs/pipe/employee-level.pipe';
-import { DepartmentPipe } from '@libs/pipe/department.pipe';
+import { EmployeePipe } from '@libs/pipe/employee.pipe';
 
 /**
  * 管理員模組
@@ -15,9 +14,8 @@ import { DepartmentPipe } from '@libs/pipe/department.pipe';
   declarations: [
     EmployeeComponent,
     EmployeeDialogComponent,
-    EmployeeLevelPipe,
-    DepartmentPipe,
     ConfigComponent,
+    EmployeePipe,
   ],
   imports: [CommonModule, AdminRoutingModule, PublicModule],
 })

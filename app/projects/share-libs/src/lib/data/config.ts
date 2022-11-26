@@ -1,4 +1,4 @@
-import { Reason } from '@libs/enum/config-enum';
+import { PunchReason } from '@libs/enum/punch-enum';
 import { Holiday, WorkingPeriod } from '@libs/interface/config-interface';
 import { CommonOption } from '@libs/interface/dropdown-interface';
 
@@ -9,9 +9,9 @@ import { CommonOption } from '@libs/interface/dropdown-interface';
  */
 export const reasonOptions = (): CommonOption[] => {
   const list: CommonOption[] = [];
-  for (const key in Reason) {
+  for (const key in PunchReason) {
     list.push({
-      name: Reason[key as keyof typeof Reason],
+      name: PunchReason[key as keyof typeof PunchReason],
       code: key,
     });
   }

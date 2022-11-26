@@ -5,6 +5,10 @@ import { Attendance } from '@libs/interface/punch-interface';
 import { AttendanceDialogComponent } from '@frontend/view/layout/common/attendance/attendance-dialog/attendance-dialog.component';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { PunchType } from '@libs/enum/punch-enum';
+import { punchRecord } from '@libs/data/punch';
+import { ActivatedRoute } from '@angular/router';
+
 /**
  * 出勤紀錄/管理
  */
@@ -14,56 +18,124 @@ import { DialogService } from 'primeng/dynamicdialog';
   styleUrls: ['./attendance.component.scss'],
 })
 export class AttendanceComponent implements OnInit {
-  @Input() title: '出勤管理' | '出勤紀錄' = '出勤管理';
-
+  @Input() title = '出勤管理';
   attendances: Attendance[] = [];
   employeeOptions: CommonOption[] = [];
+  monthPick = new Date();
+  employeePick = '';
+  employeeOption!: CommonOption;
 
   /**
    * constructor
    *
    * @param {MessageService} messageService MessageService
    * @param {DialogService} dialogService DialogService
+   * @param {ActivatedRoute} route ActivatedRoute
    */
   constructor(
     private messageService: MessageService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private route: ActivatedRoute
   ) {}
 
   /**
    * ngOnInit
    */
   ngOnInit(): void {
+    this.route.queryParamMap.subscribe((params) => {
+      if (params.get('id')) {
+        this.employeePick = params.get('id') as string;
+      }
+    });
     // 員工清單
     employees.forEach((employee) => {
       if (employee && employee.id && employee.name) {
         this.employeeOptions.push({
-          name: `${employee.id} - ${employee.name}(${employee.engName})`,
+          name: `${employee.id}-${employee.name}(${employee.engName})`,
           code: employee.id,
         });
       }
     });
-    this.attendances = this.buildDate();
+    // 預設當月
+    this.changeMonth();
+    // 員工選擇
+    if (this.employeePick) {
+      this.changeEmployee();
+    }
+  }
+
+  /**
+   * 選擇月份
+   */
+  changeMonth() {
+    const startDate = new Date(
+      this.monthPick.getFullYear(),
+      this.monthPick.getMonth(),
+      1
+    );
+    const endDate = new Date(
+      this.monthPick.getFullYear(),
+      this.monthPick.getMonth() + 1,
+      0
+    );
+    this.attendances = this.buildData(startDate, endDate);
+  }
+
+  /**
+   * 選擇員工
+   */
+  changeEmployee() {
+    // Title
+    this.employeeOption = this.employeeOptions.filter(
+      (e) => e.code === this.employeePick
+    )[0];
+    this.title = `出勤紀錄：${this.employeeOption.name}`;
+    this.changeMonth();
   }
 
   /**
    * 組成打卡區間
    *
+   * @param {Date} start 起始日
+   * @param {Date} end 結束日
    * @returns {Attendance[]} array
    */
-  buildDate(): Attendance[] {
+  buildData(start: Date, end: Date): Attendance[] {
+    // API
+    const records = punchRecord.filter(
+      (r) =>
+        r.employeeId === this.employeePick && r.date >= start && r.date <= end
+    );
+
     const array: Attendance[] = [];
-    const endDate = new Date();
-    const startDate = new Date(endDate.getFullYear(), endDate.getMonth(), 1);
     let id = 0;
-    while (startDate <= endDate) {
+    while (start <= end) {
+      const record = records.filter(
+        (r) => end.toDateString() == r.date.toDateString()
+      )[0];
+      const item = {
+        date: new Date(end),
+        employeeId: record?.employeeId,
+        time: record?.time,
+        create: record?.create,
+        modify: record?.modify,
+        reason: record?.reason,
+      };
+      // 上班
       array.push({
+        ...item,
         id,
-        date: new Date(endDate),
-        reason: '',
+        type: 'Start',
       });
-      endDate.setDate(endDate.getDate() - 1);
       id++;
+      // 下班
+      array.push({
+        ...item,
+        id,
+        type: 'End',
+      });
+      id++;
+      end.setDate(end.getDate() - 1);
     }
     return array;
   }
@@ -74,17 +146,15 @@ export class AttendanceComponent implements OnInit {
    * @param {any} attendance attendance
    */
   fixAttendance(attendance: Attendance) {
-    console.log(attendance);
+    const work = attendance.type === 'Start' ? PunchType.Start : PunchType.End;
     const ref = this.dialogService.open(AttendanceDialogComponent, {
-      header: '出勤補登作業',
+      header: `${work}補登作業`,
       width: '500px',
       data: attendance,
     });
     ref.onClose.subscribe((a: Attendance) => {
-      console.log(a);
       if (a) {
         this.attendances[a.id] = a;
-        console.log(this.attendances);
         this.messageService.add({
           severity: 'success',
           summary: '成功',

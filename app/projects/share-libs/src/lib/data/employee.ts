@@ -71,7 +71,7 @@ export const employees: Employee[] = [
     level: 'Level2',
   },
   {
-    id: '1003',
+    id: '1005',
     dept: 'PM',
     name: '王強',
     engName: 'John Wang',
@@ -85,7 +85,7 @@ export const employees: Employee[] = [
     level: 'Level3',
   },
   {
-    id: '1002',
+    id: '1007',
     dept: 'DIT',
     name: '趙偉恩',
     engName: 'Wayne Chao',
@@ -141,7 +141,7 @@ export const employees: Employee[] = [
     level: 'Level2',
   },
   {
-    id: '1013',
+    id: '1015',
     dept: 'CCC',
     name: '林小陳',
     engName: 'Chen Lin',
@@ -155,7 +155,7 @@ export const employees: Employee[] = [
     level: 'Level2',
   },
   {
-    id: '1012',
+    id: '1017',
     dept: 'CCC',
     name: '羅曉光',
     engName: 'Op Luo',
@@ -211,7 +211,7 @@ export const employees: Employee[] = [
     level: 'Level5',
   },
   {
-    id: '1023',
+    id: '1025',
     dept: 'BP',
     name: '陳迪',
     engName: 'Di Chen',
@@ -225,7 +225,7 @@ export const employees: Employee[] = [
     level: 'Level2',
   },
   {
-    id: '1022',
+    id: '1027',
     dept: 'BP',
     name: '艾莉絲',
     engName: 'Alice I',
