@@ -27,7 +27,7 @@ export const reasonOptions = (): CommonOption[] => {
 export const periodOptions = (): CommonOption[] => {
   return workingPeriods.map((p) => ({
     value: p.name,
-    label: `${p.start}-${p.end}`,
+    label: `${p.work}-${p.offwork}`,
   }));
 };
 
@@ -37,18 +37,18 @@ export const periodOptions = (): CommonOption[] => {
 export const workingPeriods: WorkingPeriod[] = [
   {
     name: 'group1',
-    start: '08:30',
-    end: '17:00',
+    work: '08:30',
+    offwork: '17:00',
   },
   {
     name: 'group2',
-    start: '09:00',
-    end: '17:30',
+    work: '09:00',
+    offwork: '17:30',
   },
   {
     name: 'group3',
-    start: '09:30',
-    end: '18:00',
+    work: '09:30',
+    offwork: '18:00',
   },
 ];
 
@@ -57,7 +57,7 @@ export const punchRecord: Attendance[] = [
     id: 1,
     employeeId: '1001',
     date: new Date('2022/11/24'),
-    type: 'Start',
+    type: 'Work',
     time: new Date('2022/11/24 09:15:00.000'),
     create: new Date('2022/11/24 09:15:00.000'),
   },
@@ -65,7 +65,7 @@ export const punchRecord: Attendance[] = [
     id: 2,
     employeeId: '1001',
     date: new Date('2022/11/24'),
-    type: 'End',
+    type: 'Offwork',
     time: new Date('2022/11/24 18:00:00.000'),
     create: new Date('2022/11/26 14:10:00.000'),
     modify: new Date('2022/11/26 14:10:00.000'),
@@ -75,7 +75,7 @@ export const punchRecord: Attendance[] = [
     id: 3,
     employeeId: '1001',
     date: new Date('2022/11/25'),
-    type: 'End',
+    type: 'Offwork',
     time: new Date('2022/11/24 18:00:00.000'),
     create: new Date('2022/11/26 14:10:00.000'),
     modify: new Date('2022/11/26 14:10:00.000'),
@@ -85,7 +85,7 @@ export const punchRecord: Attendance[] = [
     id: 4,
     employeeId: '1002',
     date: new Date('2022/11/25'),
-    type: 'Start',
+    type: 'Work',
     time: new Date('2022/11/25 09:15:00.000'),
     create: new Date('2022/11/25 09:15:00.000'),
   },
@@ -93,7 +93,7 @@ export const punchRecord: Attendance[] = [
     id: 5,
     employeeId: '1002',
     date: new Date('2022/11/26'),
-    type: 'Start',
+    type: 'Work',
     time: new Date('2022/11/26 09:00:00.000'),
     create: new Date('2022/11/26 14:10:00.000'),
     modify: new Date('2022/11/26 14:10:00.000'),

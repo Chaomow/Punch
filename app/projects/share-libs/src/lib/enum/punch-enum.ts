@@ -2,8 +2,8 @@
  * 補登原因
  */
 export enum PunchType {
-  Start = '上班',
-  End = '下班',
+  Work = '上班',
+  Offwork = '下班',
 }
 
 /**

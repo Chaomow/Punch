@@ -91,11 +91,15 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-attendance>
-        <tr>
+        <tr
+          [ngClass]="{ 'is-weekend': util.isWeekend(attendance.date.getDay()) }"
+        >
           <td>
             <span class="p-column-title font-bold">日期</span>
             <div class="flex justify-content-center align-items-center">
-              {{ attendance.date | date: "yyyy/MM/dd" }}
+              {{ attendance.date | date: "yyyy/MM/dd" }}({{
+                util.getWeekend(attendance.date.getDay())
+              }})
             </div>
           </td>
           <td>
@@ -137,6 +141,7 @@
               label="出勤補登"
               (click)="fixAttendance(attendance)"
               [disabled]="checkDate(attendance.date)"
+              [ngClass]="{ hidden: util.isWeekend(attendance.date.getDay()) }"
             ></button>
           </td>
         </tr>

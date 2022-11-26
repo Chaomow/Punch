@@ -1,1 +1,49 @@
-<div class="main-content"></div>
+<div class="main-content grid">
+  <div class="col-12 xl:col-4 xl:col-offset-4">
+    <p-card>
+      <div class="field grid">
+        <label class="col-fixed font-bold text-lg">系統日期</label>
+        <div class="col text-lg">
+          {{ today | date: "yyyy/MM/dd" }}({{
+            util.getWeekend(today.getDay())
+          }})
+          {{ weekend ? "(" + weekend + ")" : "" }}
+        </div>
+      </div>
+      <div class="field grid">
+        <label class="col-fixed font-bold text-lg">上班打卡時間</label>
+        <div class="col text-lg">
+          {{ workTime | date: "yyyy/MM/dd HH:mm" }}
+        </div>
+      </div>
+      <div class="field grid">
+        <label class="col-fixed font-bold text-lg">下班打卡時間</label>
+        <div class="col text-lg">
+          {{ offWorkTime | date: "yyyy/MM/dd HH:mm" }}
+        </div>
+      </div>
+      <div
+        class="flex flex-wrap align-items-center justify-content-center card-container mt-5"
+      >
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="上班打卡"
+          (click)="!workTime ? workPunch() : ''"
+          [disabled]="workTimeDisabled"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="下班打卡"
+          class="p-button-outlined"
+          [style]="{ 'margin-left': '.5em' }"
+          (click)="!offWorkTime ? offWorkPunch() : ''"
+          [disabled]="offWorkTimeDisabled"
+        ></button>
+      </div>
+    </p-card>
+  </div>
+</div>

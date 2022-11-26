@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AttendanceDialogComponent } from '@frontend/view/layout/common/attendance/attendance-dialog/attendance-dialog.component';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { UtilService } from '@libs/service/util.service';
 
 /**
  * 出勤紀錄/管理
@@ -32,11 +33,13 @@ export class AttendanceComponent implements OnInit {
    * @param {MessageService} messageService MessageService
    * @param {DialogService} dialogService DialogService
    * @param {ActivatedRoute} route ActivatedRoute
+   * @param {UtilService} util UtilService
    */
   constructor(
     private messageService: MessageService,
     private dialogService: DialogService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public util: UtilService
   ) {}
 
   /**
@@ -130,14 +133,14 @@ export class AttendanceComponent implements OnInit {
       array.push({
         ...item,
         id,
-        type: 'Start',
+        type: 'Work',
       });
       id++;
       // 下班
       array.push({
         ...item,
         id,
-        type: 'End',
+        type: 'Offwork',
       });
       id++;
       end.setDate(end.getDate() - 1);
@@ -151,9 +154,10 @@ export class AttendanceComponent implements OnInit {
    * @param {any} attendance attendance
    */
   fixAttendance(attendance: Attendance) {
-    const work = attendance.type === 'Start' ? PunchType.Start : PunchType.End;
+    const work =
+      attendance.type === 'Work' ? PunchType.Work : PunchType.Offwork;
     const ref = this.dialogService.open(AttendanceDialogComponent, {
-      header: `${work}補登作業`,
+      header: `${attendance.date}${work}補登作業`,
       width: '500px',
       data: attendance,
     });

@@ -3,8 +3,8 @@
  */
 export interface WorkingPeriod {
   name: string;
-  start: string;
-  end: string;
+  work: string;
+  offwork: string;
 }
 
 /**

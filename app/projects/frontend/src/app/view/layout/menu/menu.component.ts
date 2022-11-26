@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit {
   @ViewChild('menu') menu!: ElementRef<any>;
   @ViewChild('mask') mask!: ElementRef<any>;
   items: MenuItem[] = [];
-  role: 'admnin' | 'employee' = 'admnin';
+  role: 'admnin' | 'employee' = 'employee';
 
   /**
    * constructor
