@@ -1,27 +1,36 @@
 <div class="main-content">
   <p-card styleClass="main-p-card">
-    <p-toolbar styleClass="mb-4 gap-2">
-      <ng-template pTemplate="left">
-        <span class="pr-2">分類</span>
-        <div class="toolbar-option">
-          <p-dropdown
-            #configPick
-            [options]="configOptions"
-            [autoDisplayFirst]="true"
-            optionLabel="name"
-            optionValue="code"
-            appendTo="body"
-            styleClass="w-full"
-            (onChange)="changeConfig(configPick.value)"
-          >
-          </p-dropdown>
-        </div>
-      </ng-template>
-      <ng-template pTemplate="right">
-        <span class="p-error">尚未開放參數編輯</span>
-      </ng-template>
-    </p-toolbar>
     <form [formGroup]="configForm" (ngSubmit)="submit()">
+      <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+          <span class="pr-2">分類</span>
+          <div class="toolbar-option">
+            <p-dropdown
+              #configPick
+              [options]="configOptions"
+              [autoDisplayFirst]="true"
+              optionLabel="name"
+              optionValue="code"
+              appendTo="body"
+              styleClass="w-full"
+              (onChange)="changeConfig(configPick.value)"
+            >
+            </p-dropdown>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="right">
+          <!-- <button
+            pButton
+            pRipple
+            label="儲存"
+            icon="pi pi-save"
+            class="p-button-text p-button-raised"
+            type="submit"
+            disabled
+          ></button> -->
+          <span class="p-error pl-3">尚未開放參數編輯</span>
+        </ng-template>
+      </p-toolbar>
       <p-table
         #dt
         [value]="consfigList"
@@ -34,7 +43,7 @@
       >
         <ng-template pTemplate="caption">
           <div class="flex flex-column xl:flex-row xl:justify-content-between">
-            <h2 class="m-0">參數設定</h2>
+            <h2 class="m-0">系統參數</h2>
           </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -53,16 +62,30 @@
         </ng-template>
         <ng-template pTemplate="body" let-config>
           <tr>
-            <td>
+            <td pEditableColumn>
               <span class="p-column-title font-bold">參數名稱</span>
               <div class="flex justify-content-center align-items-center">
+                <!-- <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input pInputText type="text" class="p-inputtext-sm" />
+                  </ng-template>
+                  <ng-template pTemplate="output"> -->
                 {{ config.code }}
+                <!-- </ng-template>
+                </p-cellEditor> -->
               </div>
             </td>
-            <td>
+            <td pEditableColumn>
               <span class="p-column-title font-bold">參數值</span>
               <div class="flex justify-content-center align-items-center">
+                <!-- <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input pInputText type="text" class="p-inputtext-sm" />
+                  </ng-template> -->
+                <!-- <ng-template pTemplate="output"> -->
                 {{ config.name }}
+                <!-- </ng-template>
+                </p-cellEditor> -->
               </div>
             </td>
           </tr>
