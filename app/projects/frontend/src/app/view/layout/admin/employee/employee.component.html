@@ -32,13 +32,13 @@
       [value]="employees"
       [rows]="10"
       [paginator]="true"
-      [globalFilterFields]="['id', 'dept', 'name', 'engName', 'level']"
+      [globalFilterFields]="['userId', 'dept', 'name', 'engName', 'level']"
       [(selection)]="selectedEmployees"
       [rowHover]="true"
       currentPageReportTemplate="顯示第 {first} 到 {last} 筆員工，共 {totalRecords} 筆"
       [showCurrentPageReport]="true"
       responsiveLayout="stack"
-      dataKey="id"
+      dataKey="userId"
     >
       <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
@@ -47,9 +47,9 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="id" style="min-width: 5rem">
+          <th pSortableColumn="userId" style="min-width: 5rem">
             <div class="flex justify-content-center align-items-center">
-              員編 <p-sortIcon field="id"></p-sortIcon>
+              員編 <p-sortIcon field="userId"></p-sortIcon>
             </div>
           </th>
           <th pSortableColumn="dept" style="min-width: 5rem">
@@ -85,7 +85,7 @@
           <td>
             <span class="p-column-title font-bold">員編</span>
             <div class="flex justify-content-center align-items-center">
-              {{ employee.id }}
+              {{ employee.userId }}
             </div>
           </td>
           <td>

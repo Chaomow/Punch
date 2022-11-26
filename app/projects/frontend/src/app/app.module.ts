@@ -15,7 +15,7 @@ import player from 'lottie-web';
  *
  * @returns {any} webpackChunkName: 'lottie-web'
  */
-export function playerFactory() {
+export function playerFactory(): any {
   return player;
 }
 

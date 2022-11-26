@@ -1,18 +1,29 @@
 /**
- * 補登原因
+ * 打卡
  */
 export enum PunchType {
-  Work = '上班',
-  Offwork = '下班',
+  work = '上班',
+  offwork = '下班',
+}
+export enum PunchTypeKey {
+  WORK = 'work',
+  OFFWORK = 'offwork',
 }
 
-/**
+/**cd
  * 補登原因
  */
 export enum PunchReason {
-  Forget = '忘記打卡',
-  Errand = '出差/受訓',
-  Meeting = '會議',
-  Change = '調整',
-  Other = '其他',
+  forget = '忘記打卡',
+  errand = '出差/受訓',
+  meeting = '會議',
+  change = '調整',
+  other = '其他',
+}
+export enum PunchReasonKey {
+  FORGET = 'forget',
+  ERRAND = 'errand',
+  MEETING = 'meeting',
+  CHANGE = 'change',
+  OTHER = 'other',
 }

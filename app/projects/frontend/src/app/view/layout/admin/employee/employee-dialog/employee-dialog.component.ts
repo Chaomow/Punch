@@ -16,7 +16,7 @@ import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 })
 export class EmployeeDialogComponent implements OnInit {
   employeeForm: FormGroup = new FormGroup({
-    id: new FormControl('', Validators.required),
+    userId: new FormControl('', Validators.required),
     dept: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
     engName: new FormControl('', Validators.required),
@@ -29,8 +29,6 @@ export class EmployeeDialogComponent implements OnInit {
   groupList!: CommonOption[];
 
   /**
-   * constructor
-   *
    * @param {DynamicDialogRef} ref DynamicDialogRef
    * @param {DynamicDialogConfig} config DynamicDialogConfig
    */
@@ -49,8 +47,10 @@ export class EmployeeDialogComponent implements OnInit {
     this.groupList = periodOptions();
     if (this.config && this.config.data) {
       this.employee = this.config.data as Employee;
-      (this.employeeForm.get('id') as FormControl).setValue(this.employee.id);
-      (this.employeeForm.get('id') as FormControl).disable();
+      (this.employeeForm.get('userId') as FormControl).setValue(
+        this.employee.userId
+      );
+      (this.employeeForm.get('userId') as FormControl).disable();
       (this.employeeForm.get('dept') as FormControl).setValue(
         this.employee.dept
       );

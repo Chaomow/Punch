@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UtilService } from '@libs/service/util.service';
 
 /**
@@ -9,37 +9,40 @@ import { UtilService } from '@libs/service/util.service';
   templateUrl: './punch.component.html',
   styleUrls: ['./punch.component.scss'],
 })
-export class PunchComponent {
+export class PunchComponent implements OnInit {
   // 系統日
   today: Date = new Date();
-  weekend!: string;
+  isWeekend = false;
 
   // 上班打卡時間
   workTime: Date | undefined;
-  workTimeDisabled = false;
 
   // 下班打卡時間
   offWorkTime: Date | undefined;
-  offWorkTimeDisabled = false;
 
   /**
-   * constructor
-   *
    * @param {UtilService} util UtilService
    */
   constructor(public util: UtilService) {}
 
   /**
+   * ngOnInit
+   */
+  ngOnInit(): void {
+    this.isWeekend = this.util.isWeekend(this.today.getDay());
+  }
+
+  /**
    * 上班打卡
    */
-  workPunch() {
+  workPunch(): void {
     this.workTime = new Date();
   }
 
   /**
    * 下班打卡
    */
-  offWorkPunch() {
+  offWorkPunch(): void {
     this.offWorkTime = new Date();
   }
 }

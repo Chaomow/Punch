@@ -1,3 +1,23 @@
+import { RoleKey } from '@libs/enum/config-enum';
+
+/**
+ * 帳號密碼
+ */
+export interface Account {
+  userId?: string;
+  password?: string;
+}
+
+/**
+ * 登入資訊
+ */
+export interface LoginInfo {
+  userId: string;
+  name?: string;
+  role?: RoleKey.ADMIN | RoleKey.EMPLOYEE | undefined;
+  loginTime?: Date;
+}
+
 /**
  * 上下班時間
  */
@@ -13,12 +33,4 @@ export interface WorkingPeriod {
 export interface Holiday {
   title: string;
   dates: Date[];
-}
-
-/**
- * 角色
- */
-export interface Role {
-  id: string;
-  level: 'admin' | 'employee';
 }

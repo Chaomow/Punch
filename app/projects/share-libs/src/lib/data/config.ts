@@ -1,5 +1,5 @@
-import { Role } from '@libs/enum/config-enum';
-import { Holiday } from '@libs/interface/config-interface';
+import { Role, RoleKey } from '@libs/enum/config-enum';
+import { Account, Holiday } from '@libs/interface/config-interface';
 import { CommonOption } from '@libs/interface/dropdown-interface';
 
 /**
@@ -38,6 +38,14 @@ export const holidayOptions = (): CommonOption[] => {
       };
     })
   );
+};
+
+/**
+ * 管理員帳號
+ */
+export const admin: Account = {
+  userId: RoleKey.ADMIN,
+  password: 'd89dec27ca605691e87116f5cba7a10f',
 };
 
 /**

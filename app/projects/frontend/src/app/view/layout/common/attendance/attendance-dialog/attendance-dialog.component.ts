@@ -24,8 +24,6 @@ export class AttendanceDialogComponent implements OnInit {
   reasonList!: CommonOption[];
 
   /**
-   * constructor
-   *
    * @param {DynamicDialogRef} ref DynamicDialogRef
    * @param {DynamicDialogConfig} config DynamicDialogConfig
    */

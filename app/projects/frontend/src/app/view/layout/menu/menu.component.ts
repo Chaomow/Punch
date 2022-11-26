@@ -1,5 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { RouteService } from '@libs/service/route.service';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { RoleKey } from '@libs/enum/config-enum';
+import { LogoutService } from '@libs/service/logout.service';
+import { UtilService } from '@libs/service/util.service';
 import { MenuItem, MessageService } from 'primeng/api';
 
 /**
@@ -13,24 +15,24 @@ import { MenuItem, MessageService } from 'primeng/api';
 export class MenuComponent implements OnInit {
   @ViewChild('menu') menu!: ElementRef<any>;
   @ViewChild('mask') mask!: ElementRef<any>;
+  @Input() isAdmin = false;
   items: MenuItem[] = [];
-  role: 'admnin' | 'employee' = 'employee';
 
   /**
-   * constructor
-   *
-   * @param {MessageService} messageService 訊息
-   * @param {RouteService} routeService 路由
+   * @param {MessageService} messageService MessageService
+   * @param {UtilService} util UtilService
+   * @param {LogoutService} logout LogoutService
    */
   constructor(
     private messageService: MessageService,
-    private routeService: RouteService
+    private util: UtilService,
+    private logout: LogoutService
   ) {}
 
   /**
    * ngOnInit
    */
-  ngOnInit() {
+  ngOnInit(): void {
     // 員工選單
     const employeeMenu: MenuItem[] = [
       {
@@ -77,7 +79,7 @@ export class MenuComponent implements OnInit {
          */
         command: () => {
           this.hideMenu();
-          this.routeService.go('login');
+          this.logout.doLogout();
           this.messageService.add({
             severity: 'success',
             summary: '登出',
@@ -86,14 +88,9 @@ export class MenuComponent implements OnInit {
         },
       },
     ];
-    switch (this.role) {
-      case 'admnin':
-        this.items = [...adminMenu, ...commonMenu];
-        break;
-      case 'employee':
-        this.items = [...employeeMenu, ...commonMenu];
-        break;
-    }
+    this.items = this.isAdmin
+      ? [...adminMenu, ...commonMenu]
+      : [...employeeMenu, ...commonMenu];
   }
 
   /**
@@ -106,7 +103,7 @@ export class MenuComponent implements OnInit {
   /**
    * 點擊漢堡條
    */
-  showMenu() {
+  showMenu(): void {
     this.mask.nativeElement.classList.add('active');
     this.menu.nativeElement.classList.add('active');
   }
@@ -114,7 +111,7 @@ export class MenuComponent implements OnInit {
   /**
    * 點擊遮罩
    */
-  hideMenu() {
+  hideMenu(): void {
     this.mask.nativeElement.classList.remove('active');
     this.menu.nativeElement.classList.remove('active');
   }

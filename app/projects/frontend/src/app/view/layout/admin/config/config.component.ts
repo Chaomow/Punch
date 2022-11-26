@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { holidayOptions, roleOptions } from '@libs/data/config';
 import { deptOptions, levelOptions } from '@libs/data/employee';
 import { periodOptions, reasonOptions } from '@libs/data/punch';
+import { Role } from '@libs/enum/config-enum';
 import { CommonOption } from '@libs/interface/dropdown-interface';
 
 /**
@@ -87,7 +88,7 @@ export class ConfigComponent implements OnInit {
   /**
    * 儲存
    */
-  submit() {
+  submit(): void {
     // TODO
   }
 }

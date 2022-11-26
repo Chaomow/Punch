@@ -9,8 +9,6 @@ import { Router } from '@angular/router';
 })
 export class RouteService {
   /**
-   * constructor
-   *
    * @param {Router} router Router
    */
   constructor(private router: Router) {}

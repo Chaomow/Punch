@@ -1,3 +1,5 @@
+import { PunchTypeKey } from '@libs/enum/punch-enum';
+
 /**
  * 出勤紀錄
  */
@@ -7,8 +9,8 @@ export interface Attendance {
   employeeId?: string;
   // 打卡日
   date: Date;
-  // Work上班 Offwork下班;
-  type: 'Work' | 'Offwork';
+  // work上班 offwork下班;
+  type: PunchTypeKey.WORK | PunchTypeKey.OFFWORK | string;
   // 打卡時間
   time?: Date;
   // 建立時間

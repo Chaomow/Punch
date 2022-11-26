@@ -8,25 +8,25 @@
     </ng-template>
     <form [formGroup]="loginForm" (ngSubmit)="submit()">
       <div class="mb-4">
-        <label for="username">登入帳號</label>
+        <label for="userId">登入帳號</label>
         <input
           pInputText
-          id="username"
+          id="userId"
           type="text"
           class="w-full"
           [ngClass]="
-            loginForm.controls['password'].touched &&
-            loginForm.controls['password'].errors
+            loginForm.controls['userId'].touched &&
+            loginForm.controls['userId'].errors
               ? 'ng-invalid ng-dirty'
               : ''
           "
-          formControlName="username"
+          formControlName="userId"
           placeholder="請輸入帳號"
         />
         <small
           *ngIf="
-            loginForm.controls['username'].touched &&
-            loginForm.controls['username'].errors
+            loginForm.controls['userId'].touched &&
+            loginForm.controls['userId'].errors
           "
           class="p-error block absolute"
         >

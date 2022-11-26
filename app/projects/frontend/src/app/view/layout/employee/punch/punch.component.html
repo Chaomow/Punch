@@ -7,7 +7,6 @@
           {{ today | date: "yyyy/MM/dd" }}({{
             util.getWeekend(today.getDay())
           }})
-          {{ weekend ? "(" + weekend + ")" : "" }}
         </div>
       </div>
       <div class="field grid">
@@ -31,17 +30,16 @@
           type="button"
           label="上班打卡"
           (click)="!workTime ? workPunch() : ''"
-          [disabled]="workTimeDisabled"
+          [disabled]="isWeekend || workTime"
         ></button>
         <button
           pButton
           pRipple
           type="button"
           label="下班打卡"
-          class="p-button-outlined"
-          [style]="{ 'margin-left': '.5em' }"
+          class="p-button-outlined ml-5"
           (click)="!offWorkTime ? offWorkPunch() : ''"
-          [disabled]="offWorkTimeDisabled"
+          [disabled]="isWeekend || offWorkTime"
         ></button>
       </div>
     </p-card>

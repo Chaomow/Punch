@@ -20,18 +20,16 @@ export class EmployeeComponent implements OnInit {
   selectedEmployees: Employee[] = [];
 
   /**
-   * constructor
-   *
    * @param {MessageService} messageService MessageService
    * @param {ConfirmationService} confirmationService ConfirmationService
    * @param {DialogService} dialogService DialogService
-   * @param {RouteService} routeService 路由
+   * @param {RouteService} route RouteService
    */
   constructor(
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private dialogService: DialogService,
-    private routeService: RouteService
+    private route: RouteService
   ) {}
 
   /**
@@ -45,13 +43,13 @@ export class EmployeeComponent implements OnInit {
   /**
    * 新增員工
    */
-  openNew() {
+  openNew(): void {
     const ref = this.dialogService.open(EmployeeDialogComponent, {
       header: '新增員工',
       width: '500px',
     });
     ref.onClose.subscribe((employee: Employee) => {
-      if (employee && employee.id) {
+      if (employee && employee.userId) {
         this.employees.unshift(employee);
         this.employees = [...this.employees];
         this.messageService.add({
@@ -70,7 +68,7 @@ export class EmployeeComponent implements OnInit {
    * @param {any} employee employee
    */
   openPunch(employee: Employee) {
-    this.routeService.go('admin/attendance', { id: employee.id });
+    this.route.go('admin/attendance', { id: employee.userId });
   }
 
   /**
@@ -85,8 +83,8 @@ export class EmployeeComponent implements OnInit {
       data: employee,
     });
     ref.onClose.subscribe((e: Employee) => {
-      if (e && e.id) {
-        this.employees[this.findIndexById(e.id)] = e;
+      if (e && e.userId) {
+        this.employees[this.findIndexById(e.userId)] = e;
         this.messageService.add({
           severity: 'success',
           summary: '成功',
@@ -110,7 +108,9 @@ export class EmployeeComponent implements OnInit {
        * accept
        */
       accept: () => {
-        this.employees = this.employees.filter((val) => val.id !== employee.id);
+        this.employees = this.employees.filter(
+          (val) => val.userId !== employee.userId
+        );
         this.messageService.add({
           severity: 'success',
           summary: '成功',
@@ -124,13 +124,13 @@ export class EmployeeComponent implements OnInit {
   /**
    * findIndexById
    *
-   * @param {string} id string
+   * @param {string} userId string
    * @returns {number} index
    */
-  findIndexById(id: string): number {
+  findIndexById(userId: string): number {
     let index = -1;
     this.employees.forEach((e, i) => {
-      if (this.employees[i].id === id) {
+      if (this.employees[i].userId === userId) {
         index = i;
       }
     });

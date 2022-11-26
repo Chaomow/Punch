@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from '@environment';
-import { MenuItem } from 'primeng/api';
+import { RoleKey } from '@libs/enum/config-enum';
+import { UtilService } from '@libs/service/util.service';
 
 /**
  * LayoutComponent
@@ -10,7 +11,22 @@ import { MenuItem } from 'primeng/api';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
   title = environment.title;
-  menuItems: MenuItem[] = [];
+  isAdmin = false;
+  username = '';
+
+  /**
+   * @param {UtilService} util UtilService
+   */
+  constructor(private util: UtilService) {}
+
+  /**
+   * ngOnInit
+   */
+  ngOnInit(): void {
+    const user = this.util.getUser();
+    this.username = user?.name as string;
+    this.isAdmin = user?.role === RoleKey.ADMIN;
+  }
 }

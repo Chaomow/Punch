@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '@frontend/view/layout/layout.component';
 import { IndexComponent } from '@frontend/view/layout/common/index/index.component';
+import { LoginGuard } from '@libs/guard/login.guard';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
           import('@frontend/view/layout/admin/admin.module').then(
             (m) => m.AdminModule
           ),
+        canActivateChild: [LoginGuard],
       },
       {
         path: 'employee',
@@ -33,6 +35,7 @@ const routes: Routes = [
           import('@frontend/view/layout/employee/employee.module').then(
             (m) => m.EmployeeModule
           ),
+        canActivateChild: [LoginGuard],
       },
     ],
   },

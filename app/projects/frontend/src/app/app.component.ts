@@ -17,8 +17,6 @@ export class AppComponent implements OnInit {
   title = environment.title;
 
   /**
-   * constructor
-   *
    * @param {PrimeNGConfig} primengConfig PrimeNGConfig
    */
   constructor(private primengConfig: PrimeNGConfig) {}
@@ -26,7 +24,7 @@ export class AppComponent implements OnInit {
   /**
    * ngOnInit
    */
-  ngOnInit() {
+  ngOnInit(): void {
     this.primengConfig.ripple = true;
   }
 }

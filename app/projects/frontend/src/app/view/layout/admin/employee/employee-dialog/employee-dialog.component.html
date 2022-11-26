@@ -1,25 +1,25 @@
 <form [formGroup]="employeeForm" (ngSubmit)="submit()">
   <div class="p-fluid">
     <div class="field mb-4">
-      <label for="id">員編</label>
+      <label for="userId">員編</label>
       <input
         pInputText
-        id="id"
+        id="userId"
         type="text"
         [ngClass]="
-          employeeForm.controls['id'].touched &&
-          employeeForm.controls['id'].errors
+          employeeForm.controls['userId'].touched &&
+          employeeForm.controls['userId'].errors
             ? 'ng-invalid ng-dirty'
             : ''
         "
-        formControlName="id"
+        formControlName="userId"
         placeholder="請輸入員編"
       />
       <small
         class="p-error block absolute"
         *ngIf="
-          employeeForm.controls['id'].touched &&
-          employeeForm.controls['id'].errors
+          employeeForm.controls['userId'].touched &&
+          employeeForm.controls['userId'].errors
         "
       >
         請輸入員編
@@ -36,8 +36,8 @@
         placeholder="請選擇部門"
         appendTo="body"
         [ngClass]="
-          employeeForm.controls['id'].touched &&
-          employeeForm.controls['id'].errors
+          employeeForm.controls['dept'].touched &&
+          employeeForm.controls['dept'].errors
             ? 'ng-invalid ng-dirty'
             : ''
         "
@@ -114,8 +114,8 @@
         placeholder="請選擇職稱"
         appendTo="body"
         [ngClass]="
-          employeeForm.controls['id'].touched &&
-          employeeForm.controls['id'].errors
+          employeeForm.controls['level'].touched &&
+          employeeForm.controls['level'].errors
             ? 'ng-invalid ng-dirty'
             : ''
         "

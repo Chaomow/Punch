@@ -16,7 +16,7 @@
           ></p-calendar>
         </div>
       </ng-template>
-      <ng-template pTemplate="right">
+      <ng-template pTemplate="right" *ngIf="isAdmin">
         <span class="pr-2">員工</span>
         <div class="toolbar-option">
           <p-dropdown
