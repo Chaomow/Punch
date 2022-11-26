@@ -61,7 +61,7 @@ export class MenuComponent implements OnInit {
         command: this.command,
       },
       {
-        label: '參數設定',
+        label: '系統參數',
         icon: 'pi pi-cog',
         routerLink: 'admin/config',
         command: this.command,

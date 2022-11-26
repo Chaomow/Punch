@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { employees } from '@libs/data/employee';
 import { EmployeeDialogComponent } from '@frontend/view/layout/admin/employee/employee-dialog/employee-dialog.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -15,8 +15,8 @@ import { RouteService } from '@libs/service/route.service';
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
 })
-export class EmployeeComponent {
-  employees: Employee[] = employees;
+export class EmployeeComponent implements OnInit {
+  employees: Employee[] = [];
   selectedEmployees: Employee[] = [];
 
   /**
@@ -33,6 +33,14 @@ export class EmployeeComponent {
     private dialogService: DialogService,
     private routeService: RouteService
   ) {}
+
+  /**
+   * ngOnInit
+   */
+  ngOnInit(): void {
+    // API
+    this.employees = employees;
+  }
 
   /**
    * 新增員工

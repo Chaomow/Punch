@@ -2,19 +2,21 @@
   <p-card styleClass="main-p-card">
     <p-toolbar styleClass="mb-4 gap-2">
       <ng-template pTemplate="left">
+        <span class="pr-2">月份</span>
         <div class="toolbar-option">
-          <span class="pr-2">月份</span>
           <p-calendar
             view="month"
             dateFormat="yy/mm"
             [readonlyInput]="true"
             inputId="monthpicker"
             [(ngModel)]="monthPick"
+            styleClass="w-full"
             (onSelect)="changeMonth()"
           ></p-calendar>
         </div>
       </ng-template>
       <ng-template pTemplate="right">
+        <span class="pr-2">員工</span>
         <div class="toolbar-option">
           <p-dropdown
             [options]="employeeOptions"

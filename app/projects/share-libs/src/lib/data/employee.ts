@@ -11,8 +11,8 @@ export const levelOptions = (): CommonOption[] => {
   const list: CommonOption[] = [];
   for (const key in Level) {
     list.push({
-      name: Level[key as keyof typeof Level],
       code: key,
+      name: Level[key as keyof typeof Level],
     });
   }
   return list;
@@ -27,8 +27,8 @@ export const deptOptions = (): CommonOption[] => {
   const list: CommonOption[] = [];
   for (const key in Department) {
     list.push({
-      name: Department[key as keyof typeof Department],
       code: key,
+      name: Department[key as keyof typeof Department],
     });
   }
   return list;

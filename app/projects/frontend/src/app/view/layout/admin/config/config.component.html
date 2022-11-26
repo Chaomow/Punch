@@ -1,1 +1,73 @@
-<div class="main-content"></div>
+<div class="main-content">
+  <p-card styleClass="main-p-card">
+    <p-toolbar styleClass="mb-4 gap-2">
+      <ng-template pTemplate="left">
+        <span class="pr-2">分類</span>
+        <div class="toolbar-option">
+          <p-dropdown
+            #configPick
+            [options]="configOptions"
+            [autoDisplayFirst]="true"
+            optionLabel="name"
+            optionValue="code"
+            appendTo="body"
+            styleClass="w-full"
+            (onChange)="changeConfig(configPick.value)"
+          >
+          </p-dropdown>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="right">
+        <span class="p-error">尚未開放參數編輯</span>
+      </ng-template>
+    </p-toolbar>
+    <form [formGroup]="configForm" (ngSubmit)="submit()">
+      <p-table
+        #dt
+        [value]="consfigList"
+        [rows]="10"
+        [paginator]="true"
+        [rowHover]="true"
+        responsiveLayout="stack"
+        dataKey="id"
+        styleClass="p-datatable-sm"
+      >
+        <ng-template pTemplate="caption">
+          <div class="flex flex-column xl:flex-row xl:justify-content-between">
+            <h2 class="m-0">參數設定</h2>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="date" style="min-width: 5rem">
+              <div class="flex justify-content-center align-items-center">
+                參數名稱
+              </div>
+            </th>
+            <th pSortableColumn="time" style="min-width: 5rem">
+              <div class="flex justify-content-center align-items-center">
+                參數值
+              </div>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-config>
+          <tr>
+            <td>
+              <span class="p-column-title font-bold">參數名稱</span>
+              <div class="flex justify-content-center align-items-center">
+                {{ config.code }}
+              </div>
+            </td>
+            <td>
+              <span class="p-column-title font-bold">參數值</span>
+              <div class="flex justify-content-center align-items-center">
+                {{ config.name }}
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </form>
+  </p-card>
+</div>

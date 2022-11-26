@@ -38,6 +38,7 @@ export class AttendanceDialogComponent implements OnInit {
    * ngOnInit
    */
   ngOnInit(): void {
+    // API
     this.reasonList = reasonOptions();
     if (this.config && this.config.data) {
       this.attendance = this.config.data as Attendance;

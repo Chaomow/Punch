@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { employees } from '@libs/data/employee';
+import { punchRecord } from '@libs/data/punch';
 import { CommonOption } from '@libs/interface/dropdown-interface';
 import { Attendance } from '@libs/interface/punch-interface';
+import { PunchType } from '@libs/enum/punch-enum';
+import { ActivatedRoute } from '@angular/router';
 import { AttendanceDialogComponent } from '@frontend/view/layout/common/attendance/attendance-dialog/attendance-dialog.component';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { PunchType } from '@libs/enum/punch-enum';
-import { punchRecord } from '@libs/data/punch';
-import { ActivatedRoute } from '@angular/router';
 
 /**
  * 出勤紀錄/管理
@@ -47,7 +47,7 @@ export class AttendanceComponent implements OnInit {
         this.employeePick = params.get('id') as string;
       }
     });
-    // 員工清單
+    // API
     employees.forEach((employee) => {
       if (employee && employee.id && employee.name) {
         this.employeeOptions.push({

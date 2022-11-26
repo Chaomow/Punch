@@ -11,11 +11,23 @@ export const reasonOptions = (): CommonOption[] => {
   const list: CommonOption[] = [];
   for (const key in PunchReason) {
     list.push({
-      name: PunchReason[key as keyof typeof PunchReason],
       code: key,
+      name: PunchReason[key as keyof typeof PunchReason],
     });
   }
   return list;
+};
+
+/**
+ * 上下班時間選單
+ *
+ * @returns {*} 上下班時間選單
+ */
+export const periodOptions = (): CommonOption[] => {
+  return workingPeriods.map((p) => ({
+    code: p.group,
+    name: `${p.start}-${p.end}`,
+  }));
 };
 
 /**

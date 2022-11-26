@@ -40,6 +40,7 @@ export class EmployeeDialogComponent implements OnInit {
    * ngOnInit
    */
   ngOnInit(): void {
+    // API
     this.deptList = deptOptions();
     this.levelList = levelOptions();
     if (this.config && this.config.data) {
