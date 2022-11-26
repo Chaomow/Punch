@@ -19,9 +19,10 @@ import { DialogService } from 'primeng/dynamicdialog';
 })
 export class AttendanceComponent implements OnInit {
   @Input() title = '出勤管理';
+  today = new Date();
   attendances: Attendance[] = [];
   employeeOptions: CommonOption[] = [];
-  monthPick = new Date();
+  monthPick = this.today;
   employeePick = '';
   employeeOption!: CommonOption;
 
@@ -110,6 +111,10 @@ export class AttendanceComponent implements OnInit {
     const array: Attendance[] = [];
     let id = 0;
     while (start <= end) {
+      if (this.checkDate(end)) {
+        end.setDate(end.getDate() - 1);
+        continue;
+      }
       const record = records.filter(
         (r) => end.toDateString() == r.date.toDateString()
       )[0];
@@ -163,5 +168,15 @@ export class AttendanceComponent implements OnInit {
         });
       }
     });
+  }
+
+  /**
+   * 確認日期
+   *
+   * @param {Date} date 打卡日
+   * @returns {boolean} 是否超過今日
+   */
+  checkDate(date: Date): boolean {
+    return date > this.today;
   }
 }

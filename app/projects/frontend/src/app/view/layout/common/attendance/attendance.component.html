@@ -12,6 +12,7 @@
             [(ngModel)]="monthPick"
             styleClass="w-full"
             (onSelect)="changeMonth()"
+            [maxDate]="today"
           ></p-calendar>
         </div>
       </ng-template>
@@ -135,6 +136,7 @@
               class="p-button-rounded p-button-text p-button-raised p-button-info mr-2"
               label="出勤補登"
               (click)="fixAttendance(attendance)"
+              [disabled]="checkDate(attendance.date)"
             ></button>
           </td>
         </tr>
