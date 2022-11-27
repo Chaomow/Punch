@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { EmployeeApiService } from '@frontend/api/employee-api.service';
 import { WorkingPeriod } from '@libs/enum/config-enum';
 import { Department, Level } from '@libs/enum/employee-enum';
 import { CommonOption } from '@libs/interface/dropdown-interface';
@@ -33,11 +34,13 @@ export class EmployeeDialogComponent implements OnInit {
    * @param {DynamicDialogRef} ref DynamicDialogRef
    * @param {DynamicDialogConfig} config DynamicDialogConfig
    * @param {DataService} data DataService
+   * @param {EmployeeApiService} api EmployeeApiService
    */
   constructor(
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
-    private data: DataService
+    private data: DataService,
+    private api: EmployeeApiService
   ) {}
 
   /**
@@ -78,7 +81,22 @@ export class EmployeeDialogComponent implements OnInit {
   submit(): void {
     this.employeeForm.markAllAsTouched();
     if (this.employeeForm.valid) {
-      this.ref.close(this.employeeForm.getRawValue());
+      if (this.config && this.config.data) {
+        this.api.newEmployee(this.employeeForm.getRawValue()).then((res) => {
+          this.close();
+        });
+      } else {
+        this.api.saveEmployee(this.employeeForm.getRawValue()).then((res) => {
+          this.close();
+        });
+      }
     }
+  }
+
+  /**
+   * 關閉視窗
+   */
+  close() {
+    this.ref.close(this.employeeForm.getRawValue());
   }
 }

@@ -118,36 +118,35 @@ export class AttendanceComponent implements OnInit {
   buildData(start: Date, end: Date): Attendance[] {
     const array: Attendance[] = [];
     // 取得員工打卡紀錄
-    const res = this.api.getPunchRecords(this.employeePick);
-    res.then((data) => {
+    this.api.getPunchRecords(this.employeePick).then((data) => {
       let id = 0;
       while (start <= end) {
         if (this.checkDate(end)) {
           end.setDate(end.getDate() - 1);
           continue;
         }
-        const record = data.filter(
+        const records = data?.filter(
           (r: Attendance) =>
             end.toDateString() == new Date(r.date).toDateString()
-        )[0];
-        const item = {
-          date: new Date(end),
-          employeeId: record?.employeeId,
-          time: record?.time,
-          create: record?.create,
-          modify: record?.modify,
-          reason: record?.reason,
-        };
+        );
         // 上班
+        const workItem = records?.filter(
+          (r) => r.type === PunchTypeKey.WORK
+        )[0];
         array.push({
-          ...item,
+          ...workItem,
+          date: new Date(end),
           id,
           type: PunchTypeKey.WORK,
         });
         id++;
         // 下班
+        const offWorkItem = records?.filter(
+          (r) => r.type === PunchTypeKey.OFFWORK
+        )[0];
         array.push({
-          ...item,
+          ...offWorkItem,
+          date: new Date(end),
           id,
           type: PunchTypeKey.OFFWORK,
         });

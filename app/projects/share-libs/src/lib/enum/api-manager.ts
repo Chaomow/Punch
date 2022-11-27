@@ -14,7 +14,6 @@ export enum ApiManager {
   punchOnWork = '/assets/data/test/success.json',
   punchOffWork = '/assets/data/test/success.json',
   // 系統參數
-  getWorkingPeriods = '/assets/data/config/periods.json',
   getHolidays = '/assets/data/config/holidays.json',
   // 測試
   testSuccess = '/assets/data/test/success.json',

@@ -5,7 +5,6 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { Employee } from '@libs/interface/employee-interface';
 import { NegativeConfirm } from '@libs/class/confirmation';
 import { RouteService } from '@libs/service/route.service';
-import { DataService } from '@libs/service/data.service';
 import { EmployeeApiService } from '@frontend/api/employee-api.service';
 
 /**
@@ -112,14 +111,16 @@ export class EmployeeComponent implements OnInit {
        * accept
        */
       accept: () => {
-        this.employees = this.employees.filter(
-          (val) => val.userId !== employee.userId
-        );
-        this.messageService.add({
-          severity: 'success',
-          summary: '成功',
-          detail: `刪除員工 ${employee.name}(${employee.engName})`,
-          life: 3000,
+        this.api.deleteEmployee(employee.userId).then((res) => {
+          this.employees = this.employees.filter(
+            (val) => val.userId !== employee.userId
+          );
+          this.messageService.add({
+            severity: 'success',
+            summary: '成功',
+            detail: `刪除員工 ${employee.name}(${employee.engName})`,
+            life: 3000,
+          });
         });
       },
     });

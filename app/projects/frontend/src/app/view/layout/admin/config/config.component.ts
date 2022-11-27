@@ -5,7 +5,6 @@ import { Department, Level } from '@libs/enum/employee-enum';
 import { PunchReason } from '@libs/enum/punch-enum';
 import { CommonOption } from '@libs/interface/dropdown-interface';
 import { DataService } from '@libs/service/data.service';
-import { lastValueFrom } from 'rxjs';
 
 /**
  * 參數設定

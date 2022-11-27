@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { RouteService } from './route.service';
-import { MessageService } from 'primeng/api';
-import { UtilService } from './util.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { RouteService } from '@libs/service/route.service';
+import { UtilService } from '@libs/service/util.service';
+import { MessageService } from 'primeng/api';
 import { catchError, Observable, Observer, tap, throwError } from 'rxjs';
 
 /**
@@ -33,9 +32,29 @@ export class ApiService {
    * @returns {Observable<any>} res
    */
   get(url: string): Observable<any> {
+    return this.responseControl(this.http.get(url));
+  }
+
+  /**
+   * POST
+   *
+   * @param {string} url api 路徑
+   * @param {any} data data
+   * @returns {Observable<any>} res
+   */
+  post(url: string, data: any): Observable<any> {
+    return this.responseControl(this.http.post(url, data));
+  }
+
+  /**
+   * response Control
+   *
+   * @param {Observable<object>} http$ Observable<ArrayBuffer>
+   * @returns {Observable<any>} res
+   */
+  private responseControl(http$: Observable<any>): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this.http
-        .get(url)
+      http$
         .pipe(
           tap((res) => console.log(res)),
           catchError((error: HttpErrorResponse) => this.handleError(error))

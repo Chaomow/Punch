@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { PublicModule } from '@libs/module/public.module';
 import { AppRoutingModule } from '@frontend/app-routing.module';
 import { AppComponent } from '@frontend/app.component';
@@ -8,8 +8,8 @@ import { LoginComponent } from '@frontend/view/login/login.component';
 import { NotFoundComponent } from '@frontend/view/not-found/not-found.component';
 import { IndexComponent } from '@frontend/view/layout/common/index/index.component';
 import { LottieModule } from 'ngx-lottie';
-import player from 'lottie-web';
 import { MessageService } from 'primeng/api';
+import player from 'lottie-web';
 
 /**
  * Note we need a separate function as it's required

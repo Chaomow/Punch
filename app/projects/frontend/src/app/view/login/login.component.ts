@@ -90,7 +90,7 @@ export class LoginComponent {
             (e: Employee) => userId === e.userId && password === e.password
           );
           if (users && users[0]) {
-            const user: Employee = employee[0];
+            const user: Employee = users[0];
             data.name = `${user.userId}-${user.name}(${user.engName})`;
           }
         }

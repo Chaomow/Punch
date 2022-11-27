@@ -1,7 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { WorkingPeriod } from '@libs/enum/config-enum';
 import { Level, Department } from '@libs/enum/employee-enum';
-import { DataService } from '@libs/service/data.service';
 
 /**
  * 員工Pipe
@@ -10,11 +9,6 @@ import { DataService } from '@libs/service/data.service';
   name: 'employee',
 })
 export class EmployeePipe implements PipeTransform {
-  /**
-   * @param {DataService} data DataService
-   */
-  constructor(private data: DataService) {}
-
   /**
    * transform
    *

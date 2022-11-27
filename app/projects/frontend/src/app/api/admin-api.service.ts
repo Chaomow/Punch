@@ -29,11 +29,13 @@ export class AdminApiService {
    * @returns {Account[]} 員工清單
    */
   async getAdmin(userId: string, password: string) {
-    const res = await lastValueFrom(this.api.get(ApiManager.getAdmins));
-    if (res && res.status === true && res.data) {
-      return res.data.filter(
-        (a: Account) => a.userId === userId && a.password === password
-      );
+    if (userId && password) {
+      const res = await lastValueFrom(this.api.get(ApiManager.getAdmins));
+      if (res && res.status === true && res.data) {
+        return res.data.filter(
+          (a: Account) => a.userId === userId && a.password === password
+        );
+      }
     }
     return null;
   }

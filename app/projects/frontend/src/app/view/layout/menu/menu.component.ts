@@ -1,8 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { AdminApiService } from '@frontend/api/admin-api.service';
-import { RoleKey } from '@libs/enum/config-enum';
 import { LogoutService } from '@libs/service/logout.service';
-import { UtilService } from '@libs/service/util.service';
 import { MenuItem, MessageService } from 'primeng/api';
 
 /**
@@ -21,13 +19,11 @@ export class MenuComponent implements OnInit {
 
   /**
    * @param {MessageService} messageService MessageService
-   * @param {UtilService} util UtilService
    * @param {LogoutService} logout LogoutService
    * @param {AdminApiService} api AdminApiService
    */
   constructor(
     private messageService: MessageService,
-    private util: UtilService,
     private logout: LogoutService,
     private api: AdminApiService
   ) {}

@@ -5,8 +5,8 @@ import { Department, Level } from '@libs/enum/employee-enum';
 import { PunchReason } from '@libs/enum/punch-enum';
 import { Holiday } from '@libs/interface/config-interface';
 import { CommonOption } from '@libs/interface/dropdown-interface';
+import { ApiService } from '@libs/service/api.service';
 import { lastValueFrom } from 'rxjs';
-import { ApiService } from './api.service';
 
 /**
  * 資料處理
