@@ -56,7 +56,7 @@ export class ApiService {
     return new Observable((observer: Observer<any>) => {
       http$
         .pipe(
-          tap((res) => console.log(res)),
+          // tap((res) => console.log(res)),
           catchError((error: HttpErrorResponse) => this.handleError(error))
         )
         .subscribe({

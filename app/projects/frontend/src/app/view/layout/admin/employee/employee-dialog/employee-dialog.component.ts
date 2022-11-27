@@ -82,11 +82,11 @@ export class EmployeeDialogComponent implements OnInit {
     this.employeeForm.markAllAsTouched();
     if (this.employeeForm.valid) {
       if (this.config && this.config.data) {
-        this.api.newEmployee(this.employeeForm.getRawValue()).then((res) => {
+        this.api.saveEmployee(this.employeeForm.getRawValue()).then((res) => {
           this.close();
         });
       } else {
-        this.api.saveEmployee(this.employeeForm.getRawValue()).then((res) => {
+        this.api.newEmployee(this.employeeForm.getRawValue()).then((res) => {
           this.close();
         });
       }

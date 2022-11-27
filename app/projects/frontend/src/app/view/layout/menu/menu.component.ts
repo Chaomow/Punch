@@ -67,28 +67,28 @@ export class MenuComponent implements OnInit {
         routerLink: 'admin/config',
         command: this.command,
       },
-      {
-        label: '測試API成功',
-        icon: 'pi pi-check-circle',
-        /**
-         * command
-         */
-        command: () => {
-          this.hideMenu();
-          this.api.testSuccess();
-        },
-      },
-      {
-        label: '測試API失敗',
-        icon: 'pi pi-exclamation-triangle',
-        /**
-         * command
-         */
-        command: () => {
-          this.hideMenu();
-          this.api.testError();
-        },
-      },
+      // {
+      //   label: '測試API成功',
+      //   icon: 'pi pi-check-circle',
+      //   /**
+      //    * command
+      //    */
+      //   command: () => {
+      //     this.hideMenu();
+      //     this.api.testSuccess();
+      //   },
+      // },
+      // {
+      //   label: '測試API失敗',
+      //   icon: 'pi pi-exclamation-triangle',
+      //   /**
+      //    * command
+      //    */
+      //   command: () => {
+      //     this.hideMenu();
+      //     this.api.testError();
+      //   },
+      // },
     ];
     // 共用選單
     const commonMenu: MenuItem[] = [

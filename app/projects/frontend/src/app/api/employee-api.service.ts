@@ -38,7 +38,13 @@ export class EmployeeApiService {
    */
   async newEmployee(data: Employee): Promise<any> {
     if (data) {
-      return await lastValueFrom(this.api.post(ApiManager.newEmployee, data));
+      // return await lastValueFrom(this.api.post(ApiManager.newEmployee, data));
+      console.log({
+        api: 'newEmployee',
+        url: ApiManager.newEmployee,
+        data,
+      });
+      return await lastValueFrom(this.api.get(ApiManager.newEmployee));
     }
     return null;
   }
@@ -51,7 +57,13 @@ export class EmployeeApiService {
    */
   async saveEmployee(data: Employee): Promise<any> {
     if (data) {
-      return await lastValueFrom(this.api.post(ApiManager.saveEmployee, data));
+      // return await lastValueFrom(this.api.post(ApiManager.saveEmployee, data));
+      console.log({
+        api: 'saveEmployee',
+        url: ApiManager.saveEmployee,
+        data,
+      });
+      return await lastValueFrom(this.api.get(ApiManager.saveEmployee));
     }
     return null;
   }
@@ -64,9 +76,15 @@ export class EmployeeApiService {
    */
   async deleteEmployee(employeeId: string | undefined): Promise<any> {
     if (employeeId) {
-      return await lastValueFrom(
-        this.api.post(ApiManager.deleteEmployee, { employeeId })
-      );
+      // return await lastValueFrom(
+      //   this.api.post(ApiManager.deleteEmployee, { employeeId })
+      // );
+      console.log({
+        api: 'deleteEmployee',
+        url: ApiManager.deleteEmployee,
+        data: { employeeId },
+      });
+      return await lastValueFrom(this.api.get(ApiManager.deleteEmployee));
     }
     return null;
   }
@@ -99,9 +117,15 @@ export class EmployeeApiService {
    */
   async punchOnWork(employeeId: string | undefined): Promise<any> {
     if (employeeId) {
-      return await lastValueFrom(
-        this.api.post(ApiManager.punchOnWork, { employeeId })
-      );
+      // return await lastValueFrom(
+      //   this.api.post(ApiManager.punchOnWork, { employeeId })
+      // );
+      console.log({
+        api: 'punchOnWork',
+        url: ApiManager.punchOnWork,
+        data: { employeeId },
+      });
+      return await lastValueFrom(this.api.get(ApiManager.punchOnWork));
     }
     return null;
   }
@@ -114,9 +138,15 @@ export class EmployeeApiService {
    */
   async punchOffWork(employeeId: string | undefined): Promise<any> {
     if (employeeId) {
-      return await lastValueFrom(
-        this.api.post(ApiManager.punchOffWork, { employeeId })
-      );
+      // return await lastValueFrom(
+      //   this.api.post(ApiManager.punchOffWork, { employeeId })
+      // );
+      console.log({
+        api: 'punchOffWork',
+        url: ApiManager.punchOffWork,
+        data: { employeeId },
+      });
+      return await lastValueFrom(this.api.get(ApiManager.punchOffWork));
     }
     return null;
   }
