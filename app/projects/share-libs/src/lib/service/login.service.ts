@@ -22,7 +22,7 @@ export class LoginService {
    *
    * @param {LoginInfo} data 登入資訊
    */
-  setLoginInfo(data: LoginInfo): void {
+  async setLoginInfo(data: LoginInfo): Promise<void> {
     const now = new Date();
     const user: LoginInfo = {
       userId: data.userId,

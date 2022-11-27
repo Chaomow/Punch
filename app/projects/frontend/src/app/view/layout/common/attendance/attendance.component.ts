@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { employees } from '@libs/data/employee';
-import { punchRecord } from '@libs/data/punch';
 import { CommonOption } from '@libs/interface/dropdown-interface';
 import { Attendance } from '@libs/interface/punch-interface';
 import { PunchTypeKey } from '@libs/enum/punch-enum';
@@ -10,6 +8,7 @@ import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UtilService } from '@libs/service/util.service';
 import { RoleKey } from '@libs/enum/config-enum';
+import { EmployeeApiService } from '@frontend/api/employee-api.service';
 
 /**
  * 出勤紀錄/管理
@@ -34,12 +33,14 @@ export class AttendanceComponent implements OnInit {
    * @param {DialogService} dialogService DialogService
    * @param {ActivatedRoute} route ActivatedRoute
    * @param {UtilService} util UtilService
+   * @param {EmployeeApiService} api EmployeeApiService
    */
   constructor(
     private messageService: MessageService,
     private dialogService: DialogService,
     private route: ActivatedRoute,
-    public util: UtilService
+    public util: UtilService,
+    private api: EmployeeApiService
   ) {}
 
   /**
@@ -49,7 +50,7 @@ export class AttendanceComponent implements OnInit {
     const user = this.util.getUser();
     this.isAdmin = user?.role === RoleKey.ADMIN;
     if (this.isAdmin) {
-      // 為管理員才做網址上id判斷
+      // 為管理者才做網址上id判斷
       this.route.queryParamMap.subscribe((params) => {
         if (params.get('id')) {
           this.employeePick = params.get('id') as string;
@@ -58,22 +59,24 @@ export class AttendanceComponent implements OnInit {
     } else {
       this.employeePick = user?.userId as string;
     }
-    // API
-    employees.forEach((employee) => {
-      if (employee && employee.userId && employee.name) {
-        this.employeeOptions.push({
-          value: employee.userId,
-          label: `${employee.userId}-${employee.name}(${employee.engName})`,
-        });
+
+    this.api.getEmployees().then((data) => {
+      data.forEach((employee: any) => {
+        if (employee && employee.userId && employee.name) {
+          this.employeeOptions.push({
+            value: employee.userId,
+            label: `${employee.userId}-${employee.name}(${employee.engName})`,
+          });
+        }
+      });
+      if (this.employeePick) {
+        // 員工選擇
+        this.changeEmployee();
+      } else {
+        // 預設當月
+        this.changeMonth();
       }
     });
-    if (this.employeePick) {
-      // 員工選擇
-      this.changeEmployee();
-    } else {
-      // 預設當月
-      this.changeMonth();
-    }
   }
 
   /**
@@ -113,46 +116,45 @@ export class AttendanceComponent implements OnInit {
    * @returns {Attendance[]} array
    */
   buildData(start: Date, end: Date): Attendance[] {
-    // API
-    const records = punchRecord.filter(
-      (r) =>
-        r.employeeId === this.employeePick && r.date >= start && r.date <= end
-    );
-
     const array: Attendance[] = [];
-    let id = 0;
-    while (start <= end) {
-      if (this.checkDate(end)) {
+    // 取得員工打卡紀錄
+    const res = this.api.getPunchRecords(this.employeePick);
+    res.then((data) => {
+      let id = 0;
+      while (start <= end) {
+        if (this.checkDate(end)) {
+          end.setDate(end.getDate() - 1);
+          continue;
+        }
+        const record = data.filter(
+          (r: Attendance) =>
+            end.toDateString() == new Date(r.date).toDateString()
+        )[0];
+        const item = {
+          date: new Date(end),
+          employeeId: record?.employeeId,
+          time: record?.time,
+          create: record?.create,
+          modify: record?.modify,
+          reason: record?.reason,
+        };
+        // 上班
+        array.push({
+          ...item,
+          id,
+          type: PunchTypeKey.WORK,
+        });
+        id++;
+        // 下班
+        array.push({
+          ...item,
+          id,
+          type: PunchTypeKey.OFFWORK,
+        });
+        id++;
         end.setDate(end.getDate() - 1);
-        continue;
       }
-      const record = records.filter(
-        (r) => end.toDateString() == r.date.toDateString()
-      )[0];
-      const item = {
-        date: new Date(end),
-        employeeId: record?.employeeId,
-        time: record?.time,
-        create: record?.create,
-        modify: record?.modify,
-        reason: record?.reason,
-      };
-      // 上班
-      array.push({
-        ...item,
-        id,
-        type: PunchTypeKey.WORK,
-      });
-      id++;
-      // 下班
-      array.push({
-        ...item,
-        id,
-        type: PunchTypeKey.OFFWORK,
-      });
-      id++;
-      end.setDate(end.getDate() - 1);
-    }
+    });
     return array;
   }
 

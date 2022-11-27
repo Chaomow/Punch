@@ -8,7 +8,7 @@ import { ConfigComponent } from '@frontend/view/layout/admin/config/config.compo
 import { EmployeePipe } from '@libs/pipe/employee.pipe';
 
 /**
- * 管理員模組
+ * 管理者模組
  */
 @NgModule({
   declarations: [

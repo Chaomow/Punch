@@ -19,15 +19,6 @@ export interface LoginInfo {
 }
 
 /**
- * 上下班時間
- */
-export interface WorkingPeriod {
-  name: string;
-  work: string;
-  offwork: string;
-}
-
-/**
  * 國定假日
  */
 export interface Holiday {

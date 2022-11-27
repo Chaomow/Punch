@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { reasonOptions } from '@libs/data/punch';
+import { PunchReason } from '@libs/enum/punch-enum';
 import { CommonOption } from '@libs/interface/dropdown-interface';
 import { Attendance } from '@libs/interface/punch-interface';
+import { DataService } from '@libs/service/data.service';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 /**
@@ -26,18 +27,19 @@ export class AttendanceDialogComponent implements OnInit {
   /**
    * @param {DynamicDialogRef} ref DynamicDialogRef
    * @param {DynamicDialogConfig} config DynamicDialogConfig
+   * @param {DataService} data DataService
    */
   constructor(
     public ref: DynamicDialogRef,
-    public config: DynamicDialogConfig
+    public config: DynamicDialogConfig,
+    private data: DataService
   ) {}
 
   /**
    * ngOnInit
    */
   ngOnInit(): void {
-    // API
-    this.reasonList = reasonOptions();
+    this.reasonList = this.data.Options({ object: PunchReason });
     if (this.config && this.config.data) {
       this.attendance = this.config.data as Attendance;
       (this.attendanceForm.get('date') as FormControl).setValue(

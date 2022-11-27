@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '@environment';
 import { ConfirmationService, PrimeNGConfig } from 'primeng/api';
-import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 
 /**
@@ -11,7 +10,7 @@ import { DialogService } from 'primeng/dynamicdialog';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [MessageService, ConfirmationService, DialogService],
+  providers: [ConfirmationService, DialogService],
 })
 export class AppComponent implements OnInit {
   title = environment.title;

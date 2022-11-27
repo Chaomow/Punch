@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 /**
- * 管理員Routing
+ * 管理者Routing
  */
 @NgModule({
   imports: [RouterModule.forChild(routes)],

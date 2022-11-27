@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { employees } from '@libs/data/employee';
 import { EmployeeDialogComponent } from '@frontend/view/layout/admin/employee/employee-dialog/employee-dialog.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Employee } from '@libs/interface/employee-interface';
 import { NegativeConfirm } from '@libs/class/confirmation';
 import { RouteService } from '@libs/service/route.service';
+import { DataService } from '@libs/service/data.service';
+import { EmployeeApiService } from '@frontend/api/employee-api.service';
 
 /**
  * 員工清單
@@ -24,20 +25,23 @@ export class EmployeeComponent implements OnInit {
    * @param {ConfirmationService} confirmationService ConfirmationService
    * @param {DialogService} dialogService DialogService
    * @param {RouteService} route RouteService
+   * @param {EmployeeApiService} api EmployeeApiService
    */
   constructor(
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private dialogService: DialogService,
-    private route: RouteService
+    private route: RouteService,
+    private api: EmployeeApiService
   ) {}
 
   /**
    * ngOnInit
    */
   ngOnInit(): void {
-    // API
-    this.employees = employees;
+    this.api.getEmployees().then((data) => {
+      this.employees = data;
+    });
   }
 
   /**

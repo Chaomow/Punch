@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { periodOptions } from '@libs/data/punch';
+import { WorkingPeriod } from '@libs/enum/config-enum';
 import { Level, Department } from '@libs/enum/employee-enum';
+import { DataService } from '@libs/service/data.service';
 
 /**
  * 員工Pipe
@@ -9,6 +10,11 @@ import { Level, Department } from '@libs/enum/employee-enum';
   name: 'employee',
 })
 export class EmployeePipe implements PipeTransform {
+  /**
+   * @param {DataService} data DataService
+   */
+  constructor(private data: DataService) {}
+
   /**
    * transform
    *
@@ -23,7 +29,7 @@ export class EmployeePipe implements PipeTransform {
       case 'department':
         return Department[value as keyof typeof Department];
       case 'group':
-        return periodOptions().filter((o) => o.value === value)[0].label;
+        return WorkingPeriod[value as keyof typeof WorkingPeriod];
     }
   }
 }

@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AdminApiService } from '@frontend/api/admin-api.service';
 import { RoleKey } from '@libs/enum/config-enum';
 import { LogoutService } from '@libs/service/logout.service';
 import { UtilService } from '@libs/service/util.service';
@@ -22,11 +23,13 @@ export class MenuComponent implements OnInit {
    * @param {MessageService} messageService MessageService
    * @param {UtilService} util UtilService
    * @param {LogoutService} logout LogoutService
+   * @param {AdminApiService} api AdminApiService
    */
   constructor(
     private messageService: MessageService,
     private util: UtilService,
-    private logout: LogoutService
+    private logout: LogoutService,
+    private api: AdminApiService
   ) {}
 
   /**
@@ -48,7 +51,7 @@ export class MenuComponent implements OnInit {
         command: this.command,
       },
     ];
-    // 管理員選單
+    // 管理者選單
     const adminMenu: MenuItem[] = [
       {
         label: '員工管理',
@@ -67,6 +70,28 @@ export class MenuComponent implements OnInit {
         icon: 'pi pi-cog',
         routerLink: 'admin/config',
         command: this.command,
+      },
+      {
+        label: '測試API成功',
+        icon: 'pi pi-check-circle',
+        /**
+         * command
+         */
+        command: () => {
+          this.hideMenu();
+          this.api.testSuccess();
+        },
+      },
+      {
+        label: '測試API失敗',
+        icon: 'pi pi-exclamation-triangle',
+        /**
+         * command
+         */
+        command: () => {
+          this.hideMenu();
+          this.api.testError();
+        },
       },
     ];
     // 共用選單

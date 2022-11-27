@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { environment } from '@environment';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { admin } from '@libs/data/config';
 import { LoginService } from '@libs/service/login.service';
 import { LoginInfo } from '@libs/interface/config-interface';
-import { employees } from '@libs/data/employee';
 import { AesService } from '@libs/service/aes.service';
+import { EmployeeApiService } from '@frontend/api/employee-api.service';
+import { AdminApiService } from '@frontend/api/admin-api.service';
+import { Employee } from '@libs/interface/employee-interface';
+import { RoleKey } from '@libs/enum/config-enum';
 
 /**
  * 登入
@@ -27,11 +29,15 @@ export class LoginComponent {
    * @param {MessageService} messageService MessageService
    * @param {LoginService} login LoginService
    * @param {AesService} aes AesService
+   * @param {AdminApiService} adminApi AdminApiService
+   * @param {EmployeeApiService} employeeApi EmployeeApiService
    */
   constructor(
     private messageService: MessageService,
     private login: LoginService,
-    private aes: AesService
+    private aes: AesService,
+    private adminApi: AdminApiService,
+    private employeeApi: EmployeeApiService
   ) {}
 
   /**
@@ -68,19 +74,37 @@ export class LoginComponent {
       userId,
     };
     // API
-    if (userId === admin.userId && password === admin.password) {
-      // 管理員
-      data.name = '管理員';
+    if (RoleKey.ADMIN === userId) {
+      // 管理者
+      this.adminApi.getAdmin(userId, password).then((admin) => {
+        if (admin && admin[0]) {
+          data.name = 'Admin 管理者';
+        }
+        this.afterLogin(data);
+      });
     } else {
       // 員工
-      const res = employees.filter(
-        (e) => userId === e.userId && password === e.password
-      );
-      if (res && res[0]) {
-        const user = res[0];
-        data.name = `${user.userId}-${user.name}(${user.engName})`;
-      }
+      this.employeeApi.getEmployees().then((employee) => {
+        if (employee) {
+          const users = employee.filter(
+            (e: Employee) => userId === e.userId && password === e.password
+          );
+          if (users && users[0]) {
+            const user: Employee = employee[0];
+            data.name = `${user.userId}-${user.name}(${user.engName})`;
+          }
+        }
+        this.afterLogin(data);
+      });
     }
+  }
+
+  /**
+   * 登入後導向
+   *
+   * @param {LoginInfo} data LoginInfo
+   */
+  afterLogin(data: LoginInfo): void {
     if (data.name) {
       this.login.setLoginInfo(data);
       this.messageService.add({

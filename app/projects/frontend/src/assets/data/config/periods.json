@@ -1,0 +1,21 @@
+{
+  "code": "0000",
+  "status": true,
+  "data": [
+    {
+      "name": "group1",
+      "work": "08:30",
+      "offwork": "17:00"
+    },
+    {
+      "name": "group2",
+      "work": "09:00",
+      "offwork": "17:30"
+    },
+    {
+      "name": "group3",
+      "work": "09:30",
+      "offwork": "18:00"
+    }
+  ]
+}

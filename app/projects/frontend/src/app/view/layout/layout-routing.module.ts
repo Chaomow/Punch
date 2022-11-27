@@ -14,7 +14,7 @@ const routes: Routes = [
       {
         path: 'admin',
         /**
-         * 管理員模組
+         * 管理者模組
          *
          * @returns {any} AdminModule
          */

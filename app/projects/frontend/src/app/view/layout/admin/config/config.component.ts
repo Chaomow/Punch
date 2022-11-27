@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { holidayOptions, roleOptions } from '@libs/data/config';
-import { deptOptions, levelOptions } from '@libs/data/employee';
-import { periodOptions, reasonOptions } from '@libs/data/punch';
-import { Role } from '@libs/enum/config-enum';
+import { Role, WorkingPeriod } from '@libs/enum/config-enum';
+import { Department, Level } from '@libs/enum/employee-enum';
+import { PunchReason } from '@libs/enum/punch-enum';
 import { CommonOption } from '@libs/interface/dropdown-interface';
+import { DataService } from '@libs/service/data.service';
+import { lastValueFrom } from 'rxjs';
 
 /**
  * 參數設定
@@ -49,6 +50,11 @@ export class ConfigComponent implements OnInit {
   consfigList!: CommonOption[];
 
   /**
+   * @param {DataService} data DataService
+   */
+  constructor(private data: DataService) {}
+
+  /**
    * ngOnInit
    */
   ngOnInit(): void {
@@ -61,27 +67,30 @@ export class ConfigComponent implements OnInit {
    * @Params {string} value value
    * @param {string} value value
    */
-  changeConfig(value?: string) {
-    // API
+  async changeConfig(value?: string) {
     switch (value) {
       case 'period':
-        this.consfigList = periodOptions();
+        this.consfigList = this.data.Options({ object: WorkingPeriod });
         break;
       case 'department':
-        this.consfigList = deptOptions();
+        this.consfigList = this.data.Options({ object: Department });
         break;
       case 'level':
-        this.consfigList = levelOptions();
+        this.consfigList = this.data.Options({ object: Level });
         break;
       case 'reason':
-        this.consfigList = reasonOptions();
+        this.consfigList = this.data.Options({ object: PunchReason });
         break;
       case 'holiday':
-        this.consfigList = holidayOptions();
+        this.data.holidayOptions().then((data) => {
+          if (data) {
+            this.consfigList = data;
+          }
+        });
         break;
       case 'role':
       default:
-        this.consfigList = roleOptions();
+        this.consfigList = this.data.Options({ object: Role });
     }
   }
 

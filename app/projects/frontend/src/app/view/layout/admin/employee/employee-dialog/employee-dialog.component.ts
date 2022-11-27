@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { levelOptions, deptOptions } from '@libs/data/employee';
-import { periodOptions } from '@libs/data/punch';
+import { WorkingPeriod } from '@libs/enum/config-enum';
+import { Department, Level } from '@libs/enum/employee-enum';
 import { CommonOption } from '@libs/interface/dropdown-interface';
 import { Employee } from '@libs/interface/employee-interface';
+import { DataService } from '@libs/service/data.service';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 /**
@@ -31,10 +32,12 @@ export class EmployeeDialogComponent implements OnInit {
   /**
    * @param {DynamicDialogRef} ref DynamicDialogRef
    * @param {DynamicDialogConfig} config DynamicDialogConfig
+   * @param {DataService} data DataService
    */
   constructor(
     public ref: DynamicDialogRef,
-    public config: DynamicDialogConfig
+    public config: DynamicDialogConfig,
+    private data: DataService
   ) {}
 
   /**
@@ -42,9 +45,9 @@ export class EmployeeDialogComponent implements OnInit {
    */
   ngOnInit(): void {
     // API
-    this.deptList = deptOptions();
-    this.levelList = levelOptions();
-    this.groupList = periodOptions();
+    this.deptList = this.data.Options({ object: Department });
+    this.levelList = this.data.Options({ object: Level });
+    this.groupList = this.data.Options({ object: WorkingPeriod });
     if (this.config && this.config.data) {
       this.employee = this.config.data as Employee;
       (this.employeeForm.get('userId') as FormControl).setValue(
