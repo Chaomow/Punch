@@ -38,8 +38,6 @@
     <p-table
       #dt
       [value]="attendances"
-      [rows]="10"
-      [paginator]="true"
       [rowHover]="true"
       responsiveLayout="stack"
       dataKey="id"
@@ -52,7 +50,7 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="date" style="min-width: 5rem">
+          <th pSortableColumnDisabled="true" style="min-width: 5rem">
             <div class="flex justify-content-center align-items-center">
               日期
               <p-columnFilter
@@ -62,27 +60,27 @@
               ></p-columnFilter>
             </div>
           </th>
-          <th pSortableColumn="type" style="min-width: 5rem">
+          <th pSortableColumnDisabled="true" style="min-width: 5rem">
             <div class="flex justify-content-center align-items-center">
               打卡
             </div>
           </th>
-          <th pSortableColumn="time" style="min-width: 5rem">
+          <th pSortableColumnDisabled="true" style="min-width: 5rem">
             <div class="flex justify-content-center align-items-center">
               時間
             </div>
           </th>
-          <th pSortableColumn="create" style="min-width: 5rem">
+          <th pSortableColumnDisabled="true" style="min-width: 5rem">
             <div class="flex justify-content-center align-items-center">
               建立時間
             </div>
           </th>
-          <th pSortableColumn="reason" style="min-width: 5rem">
+          <th pSortableColumnDisabled="true" style="min-width: 5rem">
             <div class="flex justify-content-center align-items-center">
               調整原因
             </div>
           </th>
-          <th pSortableColumn="modify" style="min-width: 5rem">
+          <th pSortableColumnDisabled="true" style="min-width: 5rem">
             <div class="flex justify-content-center align-items-center">
               調整時間
             </div>
