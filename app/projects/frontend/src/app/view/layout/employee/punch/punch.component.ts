@@ -80,7 +80,7 @@ export class PunchComponent implements OnInit {
    * 下班打卡
    */
   offWorkPunch(): void {
-    this.api.punchOnWork(this.user?.userId).then((res) => {
+    this.api.punchOffWork(this.user?.userId).then((res) => {
       if (res && res.status === true) {
         this.offWorkTime = new Date();
         this.messageService.add({

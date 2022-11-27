@@ -150,4 +150,25 @@ export class EmployeeApiService {
     }
     return null;
   }
+
+  /**
+   * 出勤補登
+   *
+   * @param {Attendance} data 出勤資料
+   * @returns {any} res
+   */
+  async fixAttendance(data: Attendance): Promise<any> {
+    if (data) {
+      // return await lastValueFrom(
+      //   this.api.post(ApiManager.fixAttendance, data)
+      // );
+      console.log({
+        api: 'fixAttendance',
+        url: ApiManager.fixAttendance,
+        data,
+      });
+      return await lastValueFrom(this.api.get(ApiManager.fixAttendance));
+    }
+    return null;
+  }
 }

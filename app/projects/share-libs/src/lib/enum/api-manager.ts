@@ -13,6 +13,7 @@ export enum ApiManager {
   getPunchRecords = '/assets/data/punch/records.json',
   punchOnWork = '/assets/data/test/success.json',
   punchOffWork = '/assets/data/test/success.json',
+  fixAttendance = '/assets/data/test/success.json',
   // 系統參數
   getHolidays = '/assets/data/config/holidays.json',
   // 測試

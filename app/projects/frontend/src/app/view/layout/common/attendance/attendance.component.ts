@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonOption } from '@libs/interface/dropdown-interface';
 import { Attendance } from '@libs/interface/punch-interface';
-import { PunchTypeKey } from '@libs/enum/punch-enum';
+import { PunchType, PunchTypeKey } from '@libs/enum/punch-enum';
 import { ActivatedRoute } from '@angular/router';
 import { AttendanceDialogComponent } from '@frontend/view/layout/common/attendance/attendance-dialog/attendance-dialog.component';
 import { MessageService } from 'primeng/api';
@@ -165,8 +165,8 @@ export class AttendanceComponent implements OnInit {
   fixAttendance(attendance: Attendance) {
     const work =
       attendance.type === PunchTypeKey.WORK
-        ? PunchTypeKey.WORK
-        : PunchTypeKey.OFFWORK;
+        ? PunchType.work
+        : PunchType.offwork;
     const ref = this.dialogService.open(AttendanceDialogComponent, {
       header: `${this.util.formatDate(attendance.date)} ${work}補登作業`,
       width: '500px',

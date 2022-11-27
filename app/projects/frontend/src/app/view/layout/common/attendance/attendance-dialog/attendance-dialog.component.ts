@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { EmployeeApiService } from '@frontend/api/employee-api.service';
 import { PunchReason } from '@libs/enum/punch-enum';
 import { CommonOption } from '@libs/interface/dropdown-interface';
 import { Attendance } from '@libs/interface/punch-interface';
@@ -28,11 +29,13 @@ export class AttendanceDialogComponent implements OnInit {
    * @param {DynamicDialogRef} ref DynamicDialogRef
    * @param {DynamicDialogConfig} config DynamicDialogConfig
    * @param {DataService} data DataService
+   * @param {EmployeeApiService} api EmployeeApiService
    */
   constructor(
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
-    private data: DataService
+    private data: DataService,
+    private api: EmployeeApiService
   ) {}
 
   /**
@@ -42,19 +45,27 @@ export class AttendanceDialogComponent implements OnInit {
     this.reasonList = this.data.Options({ object: PunchReason });
     if (this.config && this.config.data) {
       this.attendance = this.config.data as Attendance;
-      (this.attendanceForm.get('date') as FormControl).setValue(
-        this.attendance.date
-      );
-      (this.attendanceForm.get('date') as FormControl).disable();
-      (this.attendanceForm.get('type') as FormControl).setValue(
-        this.attendance.type
-      );
-      (this.attendanceForm.get('time') as FormControl).setValue(
-        this.attendance.time
-      );
-      (this.attendanceForm.get('reason') as FormControl).setValue(
-        this.attendance.reason
-      );
+      if (this.attendance.date) {
+        (this.attendanceForm.get('date') as FormControl).setValue(
+          this.attendance.date
+        );
+        (this.attendanceForm.get('date') as FormControl).disable();
+      }
+      if (this.attendance.type) {
+        (this.attendanceForm.get('type') as FormControl).setValue(
+          this.attendance.type
+        );
+      }
+      if (this.attendance.time) {
+        (this.attendanceForm.get('time') as FormControl).setValue(
+          new Date(this.attendance.time)
+        );
+      }
+      if (this.attendance.reason) {
+        (this.attendanceForm.get('reason') as FormControl).setValue(
+          this.attendance.reason
+        );
+      }
     }
   }
 
@@ -65,13 +76,15 @@ export class AttendanceDialogComponent implements OnInit {
     this.attendanceForm.markAllAsTouched();
     if (this.attendanceForm.valid) {
       const a = this.attendanceForm.getRawValue();
-      const data = {
+      const data: Attendance = {
         ...this.attendance,
         ...a,
         create: this.attendance.create || new Date(),
         modify: new Date(),
       };
-      this.ref.close(data);
+      this.api.fixAttendance(data).then((res) => {
+        this.ref.close(data);
+      });
     }
   }
 }
