@@ -1,0 +1,50 @@
+<div class="main-content grid">
+  <div class="col-12 xl:col-4 xl:col-offset-4">
+    <p-card>
+      <ng-template pTemplate="header">
+        <div class="header">
+          <div class="title">請假申請</div>
+        </div>
+      </ng-template>
+      <form [formGroup]="dayoffForm" (ngSubmit)="submit()">
+        <div class="p-fluid">
+          <div class="field mb-4">
+            <label for="date">日期</label>
+            <p-calendar
+              inputId="date"
+              [ngClass]="
+                dayoffForm.controls['date'].touched &&
+                dayoffForm.controls['date'].errors
+                  ? 'ng-invalid ng-dirty'
+                  : ''
+              "
+              formControlName="date"
+              placeholder="請輸入日期"
+              dateFormat="yy/mm/dd"
+              appendTo="body"
+            ></p-calendar>
+            <small
+              class="p-error block absolute"
+              *ngIf="
+                dayoffForm.controls['date'].touched &&
+                dayoffForm.controls['date'].errors
+              "
+            >
+              請輸入日期
+            </small>
+          </div>
+        </div>
+        <div class="flex justify-content-end">
+          <button
+            pButton
+            pRipple
+            label="請假"
+            icon="pi pi-check"
+            class="p-button-raised p-button-text"
+            type="submit"
+          ></button>
+        </div>
+      </form>
+    </p-card>
+  </div>
+</div>

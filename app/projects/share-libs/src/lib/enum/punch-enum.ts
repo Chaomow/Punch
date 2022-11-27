@@ -4,10 +4,12 @@
 export enum PunchType {
   work = '上班',
   offwork = '下班',
+  dayoff = '請假',
 }
 export enum PunchTypeKey {
   WORK = 'work',
   OFFWORK = 'offwork',
+  DAYOFF = 'dayoff',
 }
 
 /**cd

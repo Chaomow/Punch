@@ -114,7 +114,6 @@ export class ApiService {
       severity: 'error',
       summary: '系統訊息',
       detail: `發生無法預期的錯誤`,
-      life: 3000,
     });
   }
 }

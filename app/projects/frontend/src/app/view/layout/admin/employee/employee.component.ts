@@ -59,7 +59,6 @@ export class EmployeeComponent implements OnInit {
           severity: 'success',
           summary: '成功',
           detail: `新增員工 ${employee.name}(${employee.engName})`,
-          life: 3000,
         });
       }
     });
@@ -92,7 +91,6 @@ export class EmployeeComponent implements OnInit {
           severity: 'success',
           summary: '成功',
           detail: `儲存員工 ${e.name}(${e.engName})`,
-          life: 3000,
         });
       }
     });
@@ -119,7 +117,6 @@ export class EmployeeComponent implements OnInit {
             severity: 'success',
             summary: '成功',
             detail: `刪除員工 ${employee.name}(${employee.engName})`,
-            life: 3000,
           });
         });
       },

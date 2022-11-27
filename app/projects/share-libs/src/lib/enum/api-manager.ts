@@ -9,6 +9,8 @@ export enum ApiManager {
   newEmployee = '/assets/data/test/success.json',
   saveEmployee = '/assets/data/test/success.json',
   deleteEmployee = '/assets/data/test/success.json',
+  getDayOff = '/assets/data/user/dayoff.json',
+  applyDayOff = '/assets/data/test/success.json',
   // 打卡
   getPunchRecords = '/assets/data/punch/records.json',
   punchOnWork = '/assets/data/test/success.json',

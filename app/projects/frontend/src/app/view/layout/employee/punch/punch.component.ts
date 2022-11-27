@@ -70,7 +70,6 @@ export class PunchComponent implements OnInit {
           severity: 'success',
           summary: '成功',
           detail: `打卡上班`,
-          life: 3000,
         });
       }
     });
@@ -87,7 +86,6 @@ export class PunchComponent implements OnInit {
           severity: 'success',
           summary: '成功',
           detail: `打卡下班`,
-          life: 3000,
         });
       }
     });

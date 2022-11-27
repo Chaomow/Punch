@@ -9,6 +9,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { UtilService } from '@libs/service/util.service';
 import { RoleKey } from '@libs/enum/config-enum';
 import { EmployeeApiService } from '@frontend/api/employee-api.service';
+import { Dayoff } from '@libs/interface/dayoff-interface';
 
 /**
  * 出勤紀錄/管理
@@ -118,41 +119,56 @@ export class AttendanceComponent implements OnInit {
   buildData(start: Date, end: Date): Attendance[] {
     const array: Attendance[] = [];
     // 取得員工打卡紀錄
-    this.api.getPunchRecords(this.employeePick).then((data) => {
-      let id = 0;
-      while (start <= end) {
-        if (this.checkDate(end)) {
-          end.setDate(end.getDate() - 1);
-          continue;
-        }
-        const records = data?.filter(
-          (r: Attendance) =>
-            end.toDateString() == new Date(r.date).toDateString()
-        );
-        // 上班
-        const workItem = records?.filter(
-          (r) => r.type === PunchTypeKey.WORK
-        )[0];
-        array.push({
-          ...workItem,
-          date: new Date(end),
-          id,
-          type: PunchTypeKey.WORK,
+    this.api.getPunchRecords(this.employeePick).then((recordData) => {
+      //取得員工休假紀錄
+      this.api
+        .getDayOff(this.employeePick, end.getMonth())
+        .then((dayOffData) => {
+          let id = 0;
+          while (start <= end) {
+            if (this.checkDate(end)) {
+              end.setDate(end.getDate() - 1);
+              continue;
+            }
+            // 當天打卡紀錄
+            const records = recordData?.filter(
+              (r: Attendance) =>
+                end.toDateString() == new Date(r.date).toDateString()
+            );
+            // 當天請假紀錄
+            const dayOff = dayOffData?.filter(
+              (r: Dayoff) =>
+                end.toDateString() == new Date(r.date).toDateString()
+            );
+            // 上班
+            const workItem = records?.filter(
+              (r) => r.type === PunchTypeKey.WORK
+            )[0];
+            array.push({
+              ...workItem,
+              date: new Date(end),
+              id,
+              type:
+                dayOff && dayOff[0] ? PunchTypeKey.DAYOFF : PunchTypeKey.WORK,
+            });
+            id++;
+            // 下班
+            const offWorkItem = records?.filter(
+              (r) => r.type === PunchTypeKey.OFFWORK
+            )[0];
+            array.push({
+              ...offWorkItem,
+              date: new Date(end),
+              id,
+              type:
+                dayOff && dayOff[0]
+                  ? PunchTypeKey.DAYOFF
+                  : PunchTypeKey.OFFWORK,
+            });
+            id++;
+            end.setDate(end.getDate() - 1);
+          }
         });
-        id++;
-        // 下班
-        const offWorkItem = records?.filter(
-          (r) => r.type === PunchTypeKey.OFFWORK
-        )[0];
-        array.push({
-          ...offWorkItem,
-          date: new Date(end),
-          id,
-          type: PunchTypeKey.OFFWORK,
-        });
-        id++;
-        end.setDate(end.getDate() - 1);
-      }
     });
     return array;
   }
@@ -179,7 +195,6 @@ export class AttendanceComponent implements OnInit {
           severity: 'success',
           summary: '成功',
           detail: `補登完成`,
-          life: 3000,
         });
       }
     });

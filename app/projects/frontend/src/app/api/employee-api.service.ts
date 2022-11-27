@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiManager } from '@libs/enum/api-manager';
+import { Dayoff } from '@libs/interface/dayoff-interface';
 import { Employee } from '@libs/interface/employee-interface';
 import { Attendance } from '@libs/interface/punch-interface';
 import { ApiService } from '@libs/service/api.service';
@@ -90,6 +91,50 @@ export class EmployeeApiService {
   }
 
   /**
+   * 取得員工請假紀錄
+   *
+   * @param {string} employeeId 員編
+   * @param {number} month 月份
+   * @returns {Dayoff[]} 請假紀錄
+   */
+  async getDayOff(
+    employeeId: string | undefined,
+    month: number
+  ): Promise<Dayoff[] | null> {
+    if (employeeId) {
+      const res = await lastValueFrom(this.api.get(ApiManager.getDayOff));
+      if (res && res.status === true && res.data) {
+        return res.data.filter(
+          (r: Dayoff) =>
+            r.employeeId === employeeId && new Date(r.date).getMonth() === month
+        );
+      }
+    }
+    return null;
+  }
+
+  /**
+   * 員工請假
+   *
+   * @param  {Dayoff} data 請假資料
+   * @returns {any} res
+   */
+  async applyDayOff(data: Dayoff): Promise<any> {
+    if (data) {
+      // return await lastValueFrom(
+      //   this.api.post(ApiManager.applyDayOff, data)
+      // );
+      console.log({
+        api: 'applyDayOff',
+        url: ApiManager.applyDayOff,
+        data,
+      });
+      return await lastValueFrom(this.api.get(ApiManager.applyDayOff));
+    }
+    return null;
+  }
+
+  /**
    * 取得員工打卡紀錄
    *
    * @param {string} employeeId 員編
@@ -101,9 +146,7 @@ export class EmployeeApiService {
     if (employeeId) {
       const res = await lastValueFrom(this.api.get(ApiManager.getPunchRecords));
       if (res && res.status === true && res.data) {
-        return res.data
-          .map((a: Attendance) => a)
-          .filter((r: Attendance) => r.employeeId === employeeId);
+        return res.data.filter((r: Attendance) => r.employeeId === employeeId);
       }
     }
     return null;

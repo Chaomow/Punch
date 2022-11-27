@@ -46,6 +46,12 @@ export class MenuComponent implements OnInit {
         routerLink: 'employee/attendance',
         command: this.command,
       },
+      {
+        label: '請假申請',
+        icon: 'pi pi-calendar-times',
+        routerLink: 'employee/dayoff',
+        command: this.command,
+      },
     ];
     // 管理者選單
     const adminMenu: MenuItem[] = [
