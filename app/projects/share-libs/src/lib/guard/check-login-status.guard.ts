@@ -48,7 +48,7 @@ export class CheckLoginStatusGuard implements CanActivate {
         // 系統時間減15分鐘
         now.setMinutes(now.getMinutes() - 15);
         // 系統時間減15分鐘 是否大於 登入時間(是否還在登入的15分鐘內)
-        if (now.getTime() > this.util.toNumber(user.loginTime)) {
+        if (now.getTime() > new Date(user.loginTime).getTime()) {
           this.util.cleanUser();
           return true;
         } else {
